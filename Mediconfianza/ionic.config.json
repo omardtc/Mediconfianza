@@ -1,0 +1,7 @@
+{
+  "name": "Mediconfianza",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
