@@ -21,5 +21,13 @@ export const routes: Routes = [
   {
     path: 'password',
     loadComponent: () => import('./password/password.page').then( m => m.PasswordPage)
+  },  {
+    path: 'user-register',
+    loadComponent: () => import('./user-register/user-register.page').then( m => m.UserRegisterPage)
   },
+  {
+    path: 'register-mr-doctor',
+    loadComponent: () => import('./register-mr-doctor/register-mr-doctor.page').then( m => m.RegisterMrDoctorPage)
+  },
+
 ];

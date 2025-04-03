@@ -1,0 +1,53 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Registro de Paciente</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="container">
+    <h2>Bienvenido a su registro como paciente</h2>
+    <p>Por favor, llene los siguientes campos para completar su registro:</p>
+
+    <a href="#" class="regresar">Regresar</a>
+
+    <ion-list>
+      <ion-item>
+        <ion-label position="stacked">Nombre</ion-label>
+        <ion-input type="text" placeholder="Ingrese su nombre"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Apellido</ion-label>
+        <ion-input type="text" placeholder="Ingrese su apellido"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Teléfono</ion-label>
+        <ion-input type="tel" placeholder="Ingrese su teléfono"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Fecha de nacimiento</ion-label>
+        <ion-datetime display-format="DD/MM/YYYY" placeholder="dd/mm/aaaa"></ion-datetime>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Nombre de usuario</ion-label>
+        <ion-input type="text" placeholder="Ingrese su usuario"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Contraseña</ion-label>
+        <ion-input type="password" placeholder="Ingrese su contraseña"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Confirmar Contraseña</ion-label>
+        <ion-input type="password" placeholder="Confirme su contraseña"></ion-input>
+      </ion-item>
+    </ion-list>
+
+    <ion-button expand="full" color="primary">Registrar</ion-button>
+  </div>
+</ion-content>

@@ -1,0 +1,57 @@
+.container {
+    background-color: #c0d6df;
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  h2 {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  p {
+    font-size: 16px;
+  }
+  
+  .regresar {
+    color: blue;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 15px;
+  }
+  
+  ion-button {
+    margin-top: 20px;
+    width: 100%;
+  }
+
+  .form-select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: white;
+    font-size: 16px;
+    cursor: pointer;
+    appearance: none; /* Oculta la flecha en algunos navegadores */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    position: relative;
+  }
+  
+  /* Agrega un icono de flecha personalizada */
+  .form-select::after {
+    content: "▼";
+    font-size: 14px;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+  
+  .form-select:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }

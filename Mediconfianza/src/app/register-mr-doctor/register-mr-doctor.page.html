@@ -1,0 +1,146 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Registro de Paciente</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="container">
+    <h2>Bienvenido a su registro como paciente</h2>
+    <p>Por favor, llene los siguientes campos para completar su registro:</p>
+
+    <a href="#" class="regresar">Regresar</a>
+
+    <ion-list>
+      <ion-item>
+        <ion-label position="stacked">Nombre</ion-label>
+        <ion-input type="text" placeholder="Ingrese su nombre"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Apellido</ion-label>
+        <ion-input type="text" placeholder="Ingrese su apellido"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <select class="form-select" name="specialty" required>
+          <option value="" disabled selected>Seleccione su especialidad</option>
+        <option>Anesteseologia</option>
+              <option>Anatomía Patológica</option>
+              <option>Cardiología Clínica</option>
+              <option>Cardiología Intervencionista</option>
+              <option>Cirugía Pediátrica</option>
+              <option>Cirugía General</option>
+              <option>Cirugía Plástica y Reconstructiva</option>
+              <option>Dermatología</option>
+              <option>Endoscopia del Aparato Digestivo</option>
+              <option>Gastroenterología</option>
+              <option>Ginegología y Obstetricia</option>
+              <option>Hematología</option>
+              <option>Infectología de Adulto</option>
+              <option>Medicina Aeroespacial</option>
+              <option>Medicina de Rehabilitación</option>
+              <option>Medicina Interna</option>
+              <option>Nefrología</option>
+              <option>Neurología de Adultos</option>
+              <option>Neumología</option>
+              <option>Oftalmología</option>
+              <option>Ortopedia</option>
+              <option>Otorrinolaringología</option>
+               <option>Patología Clínica</option>
+              <option>Pediatría</option>
+              <option>Psiquiatría General</option>
+              <option>Radiología e Imagen</option>
+              <option>Medicina Crítica</option>
+              <option>Urología</option>
+              <option>Cardiología Intervencionista</option>
+              <option>Cirugía Oncológica</option>
+              <option>Oncología Médica</option>
+              <option>Oncología Pediátrica</option>
+              <option>Radio-Oncología</option>
+              <option>Cirugía Neurológica</option>
+      </select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Cédula médica</ion-label>
+        <ion-input type="text" name="ced" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <select id="state" name="state" class="form-select" required>
+          <option value="" disabled selected>Seleccione su estado</option>
+          <option value="Aguascalientes">Aguascalientes</option>
+          <option value="Baja California">Baja California</option>
+          <option value="Baja California Sur">Baja California Sur</option>
+          <option value="Campeche">Campeche</option>
+          <option value="Chiapas">Chiapas</option>
+          <option value="Chihuahua">Chihuahua</option>
+          <option value="Ciudad de México">Ciudad de México</option>
+          <option value="Coahuila">Coahuila</option>
+          <option value="Colima">Colima</option>
+          <option value="Durango">Durango</option>
+          <option value="Estado de México">Estado de México</option>
+          <option value="Guanajuato">Guanajuato</option>
+          <option value="Guerrero">Guerrero</option>
+          <option value="Hidalgo">Hidalgo</option>
+          <option value="Jalisco">Jalisco</option>
+          <option value="Michoacán">Michoacán</option>
+          <option value="Morelos">Morelos</option>
+          <option value="Nayarit">Nayarit</option>
+          <option value="Nuevo León">Nuevo León</option>
+          <option value="Oaxaca">Oaxaca</option>
+          <option value="Puebla">Puebla</option>
+          <option value="Querétaro">Querétaro</option>
+          <option value="Quintana Roo">Quintana Roo</option>
+          <option value="San Luis Potosí">San Luis Potosí</option>
+          <option value="Sinaloa">Sinaloa</option>
+          <option value="Sonora">Sonora</option>
+          <option value="Tabasco">Tabasco</option>
+          <option value="Tamaulipas">Tamaulipas</option>
+          <option value="Tlaxcala">Tlaxcala</option>
+          <option value="Veracruz">Veracruz</option>
+          <option value="Yucatán">Yucatán</option>
+          <option value="Zacatecas">Zacatecas</option>
+      </select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Ciudad</ion-label>
+        <ion-input type="text" placeholder="Ingrese su ciudad"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">CDirección del consultorio</ion-label>
+        <ion-input type="text" placeholder="Ingrese la dirección de su consultorio"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Teléfono</ion-label>
+        <ion-input type="tel" placeholder="Ingrese su teléfono"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Fecha de nacimiento</ion-label>
+        <ion-datetime display-format="DD/MM/YYYY" placeholder="dd/mm/aaaa"></ion-datetime>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Nombre de usuario</ion-label>
+        <ion-input type="text" placeholder="Ingrese su usuario"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Contraseña</ion-label>
+        <ion-input type="password" placeholder="Ingrese su contraseña"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Confirmar Contraseña</ion-label>
+        <ion-input type="password" placeholder="Confirme su contraseña"></ion-input>
+      </ion-item>
+    </ion-list>
+
+    <ion-button expand="full" color="primary">Registrar</ion-button>
+  </div>
+</ion-content>

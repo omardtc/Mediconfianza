@@ -1,0 +1,26 @@
+.container {
+    background-color: #c0d6df;
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  h2 {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  p {
+    font-size: 16px;
+  }
+  
+  .regresar {
+    color: blue;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 15px;
+  }
+  
+  ion-button {
+    margin-top: 20px;
+    width: 100%;
+  }
