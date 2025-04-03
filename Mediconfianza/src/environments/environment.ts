@@ -1,11 +1,18 @@
-// This file can be replaced during build by using the `fileReplacements` array.
-// `ng build` replaces `environment.ts` with `environment.prod.ts`.
-// The list of file replacements can be found in `angular.json`.
+import { initializeApp } from "firebase/app";
 
 export const environment = {
-  production: false
+  production: false,
+  firebaseConfig: {
+    apiKey: "AIzaSyBGLZWHouUn4TxubpxdWHw9MgkC6Rwgu3o",
+    authDomain: "mediconfianza-c3ddf.firebaseapp.com",
+    projectId: "mediconfianza-c3ddf",
+    storageBucket: "mediconfianza-c3ddf.firebasestorage.app",
+    messagingSenderId: "629726264481",
+    appId: "1:629726264481:web:25aac19e49d7f4ea06c4e0"
+  },
 };
 
+const app = initializeApp(environment.firebaseConfig);
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.

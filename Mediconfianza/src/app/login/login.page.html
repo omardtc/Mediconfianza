@@ -1,13 +1,46 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>login</ion-title>
+    <ion-title>Login</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">login</ion-title>
+      <ion-title size="large">Login</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+    <div class="mb-6">
+      <label for="email">Email address</label>
+      <input [(ngModel)]="email" type="email" placeholder="Email" id="email" name="email" required />
+      <div *ngIf="loginForm.controls['email']?.invalid && loginForm.controls['email']?.touched">Please enter a valid email address</div>
+    </div>
+
+    <div class="mb-6">
+      <label for="password">Password</label>
+      <input [(ngModel)]="password" type="password" placeholder="Password" id="password" name="password" required />
+      <div *ngIf="loginForm.controls['password']?.invalid && loginForm.controls['password']?.touched">Please enter a valid password</div>
+    </div>
+
+    <button type="submit" 
+      [disabled]="loginForm.invalid">
+      <span class="text-gray-900 bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
+        Login
+      </span>
+    </button>
+  </form> <br>
+
+  <button (click)="onReset()">
+    <span class="text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
+      Go to Reset Password
+    </span>
+  </button>
+
+  <button (click)="onSignup()">
+    <span class="text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
+      Go to Sign Up
+    </span>
+  </button>
 </ion-content>
