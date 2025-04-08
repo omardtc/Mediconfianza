@@ -32,22 +32,26 @@
         <ion-datetime display-format="DD/MM/YYYY" placeholder="dd/mm/aaaa"></ion-datetime>
       </ion-item>
 
-      <ion-item>
-        <ion-label position="stacked">Correo</ion-label>
-        <ion-input type="text" placeholder="Ingrese su usuario"></ion-input>
-      </ion-item>
+      <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+        <ion-item>
+          <ion-label position="stacked">Correo</ion-label>
+          <ion-input type="text" placeholder="Ingrese su usuario"></ion-input>
+          <div *ngIf="loginForm.controls['email']?.invalid && loginForm.controls['email']?.touched">Please enter a valid email address</div>
 
-      <ion-item>
-        <ion-label position="stacked">Contraseña</ion-label>
-        <ion-input type="password" placeholder="Ingrese su contraseña"></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label position="stacked">Confirmar Contraseña</ion-label>
-        <ion-input type="password" placeholder="Confirme su contraseña"></ion-input>
-      </ion-item>
+        </ion-item>
+  
+        <ion-item>
+          <ion-label position="stacked">Contraseña</ion-label>
+          <ion-input type="password" placeholder="Ingrese su contraseña"></ion-input>
+        </ion-item>
+  
+        <ion-item>
+          <ion-label position="stacked">Confirmar Contraseña</ion-label>
+          <ion-input type="password" placeholder="Confirme su contraseña"></ion-input>
+          <div *ngIf="loginForm.controls['password']?.invalid && loginForm.controls['password']?.touched">Please enter a valid password</div>
+        </ion-item>
+      <ion-button expand="full" color="primary" type="submit">Registrar</ion-button>
+      </form>
     </ion-list>
-
-    <ion-button expand="full" color="primary">Registrar</ion-button>
   </div>
 </ion-content>
