@@ -29,10 +29,10 @@ export class RegisterMrDoctorPage implements OnInit {
 
   async onSubmit() {
     try {
-      await this.authService.login(this.email, this.password);
+      await this.authService.signUp(this.email, this.password);
       const alert = await this.alertController.create({
         header: 'Success',
-        message: 'You have logged in successfully!',
+        message: 'You have signed up successfully!',
         buttons: ['OK']
       });
       await alert.present();
