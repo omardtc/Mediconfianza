@@ -1,13 +1,91 @@
 <ion-header [translucent]="true">
+  <ion-toolbar color="primary"> <ion-title>Buscar Médico</ion-title>
+  </ion-toolbar>
   <ion-toolbar>
-    <ion-title>search</ion-title>
+    <ion-searchbar
+      placeholder="Buscar por nombre o apellido..."
+      animated="true"
+      [debounce]="300"  [(ngModel)]="searchTerm" (ionInput)="onSearchInput($event)"> </ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="ion-padding">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">search</ion-title>
+      <ion-title size="large">Buscar Médico</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" size-md="6">
+        <ion-item lines="full">
+          <ion-label position="stacked">Estado</ion-label>
+          <ion-select
+            [(ngModel)]="selectedState"
+            (ionChange)="onFilterChange()"
+            interface="action-sheet"
+            placeholder="Seleccionar Estado">
+            <ion-select-option value="todos">Todos los Estados</ion-select-option>
+            <ion-select-option *ngFor="let state of states$ | async" [value]="state">
+              {{ state }}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+      <ion-col size="12" size-md="6">
+        <ion-item lines="full">
+           <ion-label position="stacked">Especialidad</ion-label>
+           <ion-select
+             [(ngModel)]="selectedSpecialty"
+             (ionChange)="onFilterChange()"
+             interface="action-sheet"
+             placeholder="Seleccionar Especialidad">
+            <ion-select-option value="todos">Todas las Especialidades</ion-select-option>
+            <ion-select-option *ngFor="let specialty of specialties$ | async" [value]="specialty">
+              {{ specialty }}
+            </ion-select-option>
+           </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <div *ngIf="isLoading" class="ion-text-center ion-padding">
+    <ion-spinner name="crescent" color="primary"></ion-spinner>
+    <p>Buscando médicos...</p>
+  </div>
+
+  <div *ngIf="!isLoading">
+     <ion-list *ngIf="(doctors$ | async) as doctors; else noResultsOrInitial">
+       <ng-container *ngIf="doctors.length > 0; else noResults">
+         <ion-item *ngFor="let doctor of doctors; trackBy: trackById" lines="inset" button detail="false">
+           <ion-icon name="person-circle-outline" slot="start" color="secondary" aria-hidden="true"></ion-icon>
+           <ion-label>
+             <h2>{{ doctor.nombre }} {{ doctor.apellido }}</h2>
+             <p><ion-icon name="medkit-outline" aria-hidden="true"></ion-icon> {{ doctor.especialidad }}</p>
+             <p><ion-icon name="location-outline" aria-hidden="true"></ion-icon> {{ doctor.estado }}</p>
+             <p *ngIf="doctor.telefono"><ion-icon name="call-outline" aria-hidden="true"></ion-icon> {{ doctor.telefono }}</p>
+             </ion-label>
+            </ion-item>
+       </ng-container>
+     </ion-list>
+   </div>
+
+   <ng-template #noResultsOrInitial>
+     <div *ngIf="!isLoading">
+       <div *ngIf="searchPerformed" class="ion-text-center ion-padding">
+         <ion-icon name="search-outline" size="large" color="medium"></ion-icon>
+         <p>No se encontraron médicos con esos criterios.</p>
+       </div>
+       </div>
+   </ng-template>
+
+   <ng-template #noResults>
+     <div *ngIf="searchPerformed && !isLoading" class="ion-text-center ion-padding">
+       <ion-icon name="sad-outline" size="large" color="medium" aria-hidden="true"></ion-icon>
+       <p>No se encontraron médicos que coincidan con tu búsqueda.</p>
+     </div>
+   </ng-template>
+
 </ion-content>
