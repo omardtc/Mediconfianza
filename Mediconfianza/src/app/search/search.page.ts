@@ -7,7 +7,7 @@ import { Observable, Subject, of } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap, catchError, startWith, tap } from 'rxjs/operators';
 
 // Importa el servicio (que ahora usa Firestore)
-import { SearchService } from '../../services/search.service';
+import { SearchService } from '../search.service';
 
 // Interfaz definida aquí DENTRO (se mantiene igual)
 // Asegúrate que coincida con los campos de tu Firestore que quieres usar
