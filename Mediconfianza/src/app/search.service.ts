@@ -11,7 +11,7 @@ import {
 } from '@angular/fire/firestore';
 
 // Importa la interfaz desde el archivo de la PÁGINA
-import { Doctor } from '../pages/search/search.page';
+import { Doctor } from '/search/search.page';
 
 @Injectable({
     providedIn: 'root'
