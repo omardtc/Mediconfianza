@@ -14,16 +14,16 @@
     <ion-list>
       <ion-item>
         <ion-label position="stacked">Nombre</ion-label>
-        <ion-input type="text" placeholder="Ingrese su nombre"></ion-input>
+        <ion-input type="text" placeholder="Ingrese su nombre" [formControl]="nombre"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label position="stacked">Apellido</ion-label>
-        <ion-input type="text" placeholder="Ingrese su apellido"></ion-input>
+        <ion-input type="text" placeholder="Ingrese su apellido" [formControl]="apellido"></ion-input>
       </ion-item>
 
       <ion-item>
-        <select class="form-select" name="specialty" required>
+        <select class="form-select" name="specialty" required [formControl]="especialidad">
           <option value="" disabled selected>Seleccione su especialidad</option>
         <option>Anesteseologia</option>
               <option>Anatomía Patológica</option>
@@ -64,11 +64,11 @@
 
       <ion-item>
         <ion-label position="stacked">Cédula médica</ion-label>
-        <ion-input type="text" name="ced" required></ion-input>
+        <ion-input type="text" name="ced" required [formControl]="cedula"></ion-input>
       </ion-item>
 
       <ion-item>
-        <select id="state" name="state" class="form-select" required>
+        <select id="state" name="state" class="form-select" required [formControl]="estado">
           <option value="" disabled selected>Seleccione su estado</option>
           <option value="Aguascalientes">Aguascalientes</option>
           <option value="Baja California">Baja California</option>
@@ -106,48 +106,33 @@
       </ion-item>
 
       <ion-item>
-        <ion-label position="stacked">Ciudad</ion-label>
-        <ion-input type="text" placeholder="Ingrese su ciudad"></ion-input>
+        <ion-label position="stacked">Dirección</ion-label>
+        <ion-input type="text" placeholder="Ingrese su dirección" [formControl]="direccion"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label position="stacked">Teléfono</ion-label>
-        <ion-input type="tel" placeholder="Ingrese su teléfono"></ion-input>
+        <ion-input type="tel" placeholder="Ingrese su teléfono" [formControl]="telefono"></ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label position="stacked">Fecha de nacimiento</ion-label>
-        <ion-datetime display-format="DD/MM/YYYY" placeholder="dd/mm/aaaa"></ion-datetime>
+        <ion-label position="stacked">Fecha de nacimiento NOOOOooooOOOOoOoOOoOo LA POLITZIAAAAAAA NOOOooOOOooooOooOO</ion-label>
+        <ion-datetime display-format="DD/MM/YYYY" placeholder="dd/mm/aaaa" [formControl]="fecha"></ion-datetime>
       </ion-item>
 
-      <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
-        <ion-item>
-          <ion-label position="stacked">Correo</ion-label>
-          <ion-input
-            type="text"
-            name="email"
-            [(ngModel)]="email"
-            placeholder="Ingrese su usuario"
-            required>
-          </ion-input>
-          <div *ngIf="loginForm.controls['email']?.invalid && loginForm.controls['email']?.touched">
-            Please enter a valid email address
-          </div>
-        </ion-item>
-      
-        <ion-item>
-          <ion-label position="stacked">Contraseña</ion-label>
-          <ion-input
-            type="password"
-            name="password"
-            [(ngModel)]="password"
-            placeholder="Ingrese su contraseña"
-            required>
-          </ion-input>
-        </ion-item>
-      
-        <ion-button expand="full" color="primary" type="submit">Registrar</ion-button>
-      </form>
+      <br>
+      <label position="floating">Email:</label>
+      <br>
+      <input [(ngModel)]="email" type="email" style="background-color: rgb(211, 233, 251); border: aliceblue 3px solid; width: 1200px;"><br>
+
+      <label position="floating">Password:</label>
+      <br>
+      <input [(ngModel)]="password" type="password" style="background-color: rgb(211, 233, 251); border: aliceblue 3px solid; width: 1200px;"><br>
+
+    <br>
+
+    <button expand="full" (click)="onSubmit()" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">Login</button>
+    <br>
     </ion-list>
   </div>
 </ion-content>
