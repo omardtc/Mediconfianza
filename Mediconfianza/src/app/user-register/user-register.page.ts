@@ -5,19 +5,29 @@ import { IonContent, IonHeader, IonTitle, IonToolbar, IonList, IonItem, IonLabel
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { PacienteService } from '../paciente.service';
 
 @Component({
   selector: 'app-user-register',
   templateUrl: './user-register.page.html',
   styleUrls: ['./user-register.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonList, IonItem, IonLabel, IonInput, IonDatetime, IonButton, IonSelectOption]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonList, IonItem, IonLabel, IonInput, IonDatetime, IonButton, IonSelectOption, ReactiveFormsModule]
 })
 export class UserRegisterPage implements OnInit {
 
   email: string = '';
   password: string = '';
-  sexo: string = '';
+
+  apellido = new FormControl('',[Validators.required,Validators.minLength(1)]);
+  estado = new FormControl('',[Validators.required,Validators.minLength(1)]);
+  fecha = new FormControl('',[Validators.required,Validators.minLength(1)]);
+  id = new FormControl('',[Validators.required,Validators.minLength(1)]);
+  nombre = new FormControl('',[Validators.required,Validators.minLength(1)]);
+  sexo = new FormControl('',[Validators.required,Validators.minLength(1)]);
+  telefono = new FormControl('',[Validators.required,Validators.minLength(1)]);
+
 
 
   constructor(
