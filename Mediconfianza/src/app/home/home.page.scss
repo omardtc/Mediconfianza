@@ -25,3 +25,100 @@
 #container a {
   text-decoration: none;
 }
+
+.center{
+  text-align: center;
+}
+
+.body{
+  background: linear-gradient(to right, transparentize(red, 0.5), transparentize(lime, 0.5));
+  height: 100%;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bolder;
+}
+
+.input{
+  background: linear-gradient(to right, transparentize(rgb(135, 71, 71), 0.5), transparentize(rgb(82, 127, 82), 0.5));
+  width: 500px;
+  border: rgb(108, 96, 96) solid 1px;
+  color: black;
+  text-align: center;
+}
+
+.label{
+  color: rgb(85, 85, 85);
+}
+
+.input:hover{
+  background: linear-gradient(to right, transparentize(rgb(67, 34, 34), 0.5), transparentize(rgb(44, 68, 44), 0.5));
+  width: 500px;
+  border: rgb(42, 38, 38) solid 1px;
+}
+
+.button{
+  background: linear-gradient(to right, transparentize(rgb(135, 134, 71), 0.5), transparentize(rgb(82, 123, 127), 0.5));
+  padding: 5px;
+  width: 250px;
+  border: black solid 2px;
+}
+
+.button:hover{
+  background: linear-gradient(to right, transparentize(rgb(59, 59, 31), 0.5), transparentize(rgb(28, 43, 44), 0.5));
+}
+
+.buttonS{
+  background: linear-gradient(to right, transparentize(rgb(135, 134, 71), 0.5), transparentize(rgb(82, 123, 127), 0.5));
+  padding: 5px;
+  border: black solid 2px;
+}
+
+.buttonS:hover{
+  background: linear-gradient(to right, transparentize(rgb(59, 59, 31), 0.5), transparentize(rgb(28, 43, 44), 0.5));
+}
+
+table{
+  width: 100%;
+  border: black solid 2px;
+  border-collapse: collapse;
+}
+
+th{
+  color: white;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  background-color: #12287a;
+  border: black solid 2px;
+}
+
+tr{
+  border: black solid 2px;
+}
+
+td{
+  background-color: transparentize(#57707a,0.5);
+  border: black solid 2px;
+  height: 100px;
+  text-align: center;
+  font-weight: bolder;
+  font-size: 20px;
+}
+
+.invis{
+  background-color: transparentize(red, $amount: 1);
+  color: black;
+  border: transparentize(red, $amount: 1) 2px solid;
+  width: auto;
+  text-align: center;
+}
+
+.Hoy{
+  color: red;
+}
+
+.NoHoy{
+  color: black;
+}
+.container {
+  background-color: #c0d6df;
+  padding: 20px;
+  border-radius: 10px;
+}

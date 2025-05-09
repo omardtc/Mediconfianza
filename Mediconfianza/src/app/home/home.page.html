@@ -1,20 +1,37 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Blank
+      Calendario
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+<ion-content [fullscreen]="true" class="ion-padding">
+<div class="container">
+  <div style="text-align: center;">{{anioActual}}</div>
+  <!-- calendario.component.html -->
+<table class="table table-bordered calendar-table">
+  <thead>
+    <tr>
+      <th *ngFor="let dia of diasSemana">{{ nombresDias[dia.getDay()] }}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td *ngFor="let dia of diasSemana" [ngClass]="tieneCitas(dia) ? 'bg-info text-white' : 'bg-light'">
+          <div [ngClass]="diaActual == dia.getDate() && mesActual==dia.getMonth() && anioActual==ano? 'Hoy' : 'NoHoy'">{{ dia.getDate() }}/{{ dia.getMonth() + 1 }}</div>
+        <div *ngFor="let cita of getCitasDelDia(dia)">
+          <small>{{ cita.hora }}:00 - Dr. {{ cita.doctorApellido }}</small>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+  <!-- <ion-button (click)="CambiarSemana(1)">SIGUIENTE SEMANA</ion-button>
+  <ion-button (click)="CambiarSemana(-1)">ANTERIOR SEMANA</ion-button>-->
+  <br>
+  <button class="button" (click)="CambiarSemana(-1)">ANTERIOR SEMANA</button>
+  <button style="padding-left: 964px;"></button>
+  <button class="button" (click)="CambiarSemana(1)">SIGUIENTE SEMANA</button>
+</div>
 </ion-content>
