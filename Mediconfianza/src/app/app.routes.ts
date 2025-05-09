@@ -33,5 +33,9 @@ export const routes: Routes = [
     path: 'search',
     loadComponent: () => import('./search/search.page').then( m => m.SearchPage)
   },
+  {
+    path: 'hacercita',
+    loadComponent: () => import('./hacercita/hacercita.page').then( m => m.HacercitaPage)
+  },
 
 ];
