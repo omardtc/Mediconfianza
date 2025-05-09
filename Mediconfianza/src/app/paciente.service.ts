@@ -4,15 +4,14 @@ import { Observable } from 'rxjs';
 
 export interface Paciente {
   apellido: string;
-  direccion: string;
   estado: string;
   fecha: string;
   id: string;
   mail: string;
   nombre: string;
   password: string;
+  sexo: string;  
   telefono: string;
-  status: string;
 }
 
 @Injectable({
