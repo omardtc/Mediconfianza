@@ -1,0 +1,17 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>hacercita</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="container">
+    <table *ngFor="let medico of medicos | async">
+      <b>{{medico.nombre}} {{medico.apellido}}</b><br>
+      <h6>Cedula: {{medico.cedula}}</h6>
+      <h6><b>Especialidad: {{medico.especialidad}}</b></h6>
+      <h6>Estado: {{medico.estado}}</h6>
+      <h6>Dirección: {{medico.direccion}}</h6>
+    </table>
+  </div>
+</ion-content>
