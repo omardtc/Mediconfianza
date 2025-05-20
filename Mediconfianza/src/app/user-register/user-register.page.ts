@@ -43,11 +43,55 @@ export class UserRegisterPage implements OnInit {
   userE: string | null = null;
 
   async onSubmit() {
+    if (this.validate()){
     try {
       await this.authService.signUp(this.email, this.password);
       const alert = await this.alertController.create({
         header: 'Success',
         message: 'You have signed up successfully!',
+        buttons: ['OK']
+      });
+      await alert.present();
+      const user = await this.authService.currentUser();
+      if (user){
+        this.userE = user.email;
+        this.userID = user.uid;
+      }
+      console.log(this.userE + ": " + this.userID);
+      //this.router.navigate(['/home']);
+    } catch (error) {
+      const alert = await this.alertController.create({
+        header: 'Error',
+        message: 'Invalid email or password.',
+        buttons: ['OK']
+      });
+      await alert.present();
+    }
+      try {
+        const nPaciente: Paciente = {
+          apellido: this.apellido.value!,
+          estado: this.estado.value!,
+          fecha: this.fecha.value!,
+          uid: this.userID,
+          nombre: this.nombre.value!,
+          sexo: this.sexo.value!, 
+          telefono: this.telefono.value!,
+          password: this.password!,
+          mail: this.email!,
+        };
+        await this.pS.addPaciente(nPaciente, this.userID);
+        const alerta = await this.alertController.create({
+          header: 'SUCCESS',
+          message: 'hola',
+          buttons: ['adios'],
+        });
+        alerta.present();
+
+        try {
+      await this.authService.login(this.email, this.password);
+      const alert = await this.alertController.create({
+        header: 'Success',
+        message: 'You have logged in successfully!',
         buttons: ['OK']
       });
       await alert.present();
@@ -60,26 +104,7 @@ export class UserRegisterPage implements OnInit {
       });
       await alert.present();
     }
-    if(this.validate()){
-      try {
-        const nPaciente: Paciente = {
-          apellido: this.apellido.value!,
-          estado: this.estado.value!,
-          fecha: this.fecha.value!,
-          id: this.userID!,
-          nombre: this.nombre.value!,
-          sexo: this.sexo.value!,
-          telefono: this.telefono.value!,
-          password: this.password!,
-          mail: this.email!,
-        };
-        await this.pS.addPaciente(nPaciente);
-        const alerta = await this.alertController.create({
-          header: 'SUCCESS',
-          message: 'hola',
-          buttons: ['adios'],
-        });
-        alerta.present();
+
       } catch (error) {
         const alerta = await this.alertController.create({
           header: 'FUNNY FAIL',
@@ -94,10 +119,11 @@ export class UserRegisterPage implements OnInit {
     }
 
     if (this.validate())console.log('VALIDO');
-    else console.log('INVALIDO X2');
+    else console.log('INVALIDO X2', this.validate());
   }
 
   validate(){
+    console.log('empieza MAMI');
     console.log(this.apellido.value + ' ' + this.apellido.valid);
     console.log(this.estado.value + ' ' + this.estado.valid);
     console.log(this.fecha.value + ' ' + this.fecha.valid);
@@ -114,15 +140,6 @@ export class UserRegisterPage implements OnInit {
     this.fecha.reset;
     this.nombre.reset;
     this.telefono.reset;
-  }
-
-  validateEmail(email: string): boolean {
-    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-    return emailPattern.test(email);
-  }
-
-  onSignup() {
-    this.router.navigateByUrl("signup");
   }
 
 }
