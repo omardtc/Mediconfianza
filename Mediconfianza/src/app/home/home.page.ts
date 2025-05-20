@@ -3,7 +3,15 @@ import { IonHeader, IonToolbar, IonTitle, IonContent,IonButton } from '@ionic/an
 import { CalendarService } from '../calendar.service';
 import { CommonModule } from '@angular/common';
 import { A } from '@angular/core/weak_ref.d-Bp6cSy-X';
-
+import { AuthService } from '../auth.service';
+import { Medico, MedicoService } from '../medico.service';
+import { Paciente, PacienteService } from '../paciente.service';
+import { Observable } from 'rxjs';
+import { NgModel } from '@angular/forms';
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
+import { combineLatest } from 'rxjs';
+import { Router } from '@angular/router';
 
 declare global {
   interface Date {
@@ -23,7 +31,7 @@ Date.prototype.getWeek = function (): number {
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [IonHeader, IonToolbar, IonTitle, IonContent, CommonModule,IonButton],
+  imports: [IonHeader, IonToolbar, IonTitle, IonContent, CommonModule,IonButton,ReactiveFormsModule, FormsModule],
 })
 export class HomePage {
   
@@ -34,14 +42,48 @@ export class HomePage {
   diaActual = new Date().getDate();
   mesActual = new Date().getMonth();
   ano = new Date().getFullYear();
+  semanaHoy = new Date().getWeek();
+
+  rol = new FormControl('');
 
   nombresDias = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
 
-  constructor(private calendarService: CalendarService) {}
+  userE: string | null = null;
+  userID: string | null = null;
+  async ionViewWillEnter() {
+    const user = await this.authS.currentUser();
+    if (user){
+      this.userE = user.email;
+      this.userID = user.uid;
+    }
+    console.log("Página visitada" + this.userE);
+  }
+
+  medicos: Observable<Medico[]>;
+  pacientes: Observable<Paciente[]>;
+  constructor(private calendarService: CalendarService, private authS: AuthService, private mS: MedicoService, private pS: PacienteService, private router: Router) {
+    this.medicos = mS.getMedicos();
+    this.pacientes = pS.getPacientes();
+  }
 
   ngOnInit() {
     this.diasSemana = this.calendarService.getDiasDeSemana(this.anioActual, this.semanaActual);
     this.cargarCitas();
+    // console.log(this.rol);
+    combineLatest([this.medicos, this.pacientes]).subscribe(([medicos, pacientes]) => {
+    const medico = medicos.find(m => m.uid === this.userID);
+    if (medico) {
+      this.rol.setValue('medico');
+    } else {
+      const paciente = pacientes.find(p => p.uid === this.userID);
+      if (paciente) {
+        this.rol.setValue('paciente');
+      }else{
+        this.rol.setValue('medico');
+        // this.router.navigate(['/login'])
+      }
+    }
+  });
   }
 
   cargarCitas() {
@@ -77,6 +119,32 @@ export class HomePage {
     this.ngOnInit();
   }
   
+  ShowDate(dia: number,mes: number,ano: number,dia2: number,mes2: number,ano2: number){
+    // console.log(dia+'/'+mes+'/'+ano);
+    // console.log(dia2+'/'+mes2+'/'+ano2);
+    // console.log('---');
+    if (ano2>ano){
+      return true;
+    }else{
+      if (mes2>mes){
+        return true;
+      }else{
+        if (mes2<mes){
+          return false;
+        }else{
+          if (dia2>=dia){
+            return true;
+          }else{
+            return false;
+          }
+        }
+      }
+    }
+  }
+
+  Horarios(){
+    this.router.navigate(['/horarios']);
+  }
   
 }
 

@@ -43,6 +43,7 @@ export class RegisterMrDoctorPage implements OnInit {
   userID: string = '';
 
   async onSubmit() {
+    if (this.validate()){
     try {
       await this.authService.signUp(this.email, this.password);
       const alert = await this.alertController.create({
@@ -66,7 +67,6 @@ export class RegisterMrDoctorPage implements OnInit {
       });
       await alert.present();
     }//registra el gmail
-    if (this.validate()){
       try {
         const nmedico: Medico = {
           apellido: this.apellido.value!,
@@ -75,20 +75,40 @@ export class RegisterMrDoctorPage implements OnInit {
           especialidad: this.especialidad.value!,
           estado: this.estado.value!,
           fecha: this.fecha.value!,
-          id: this.userID,
+          uid: this.userID,
           mail: this.email,
           nombre: this.nombre.value!,
           password: this.password,
           telefono: this.telefono.value!,
           status: 'MEDICO',
+          horario: '',
         };
-        await this.mS.addMedico(nmedico);
+        await this.mS.addMedico(nmedico, this.userID);
         const alerta = await this.alertController.create({
           header: 'SUCCESS',
           message: 'Funny joke, eh?',
           buttons: ['HAHAHA'],
         });
         alerta.present();
+
+        try {
+      await this.authService.login(this.email, this.password);
+      const alert = await this.alertController.create({
+        header: 'Success',
+        message: 'You have logged in successfully!',
+        buttons: ['OK']
+      });
+      await alert.present();
+      this.router.navigate(['/home']);
+    } catch (error) {
+      const alert = await this.alertController.create({
+        header: 'Error',
+        message: 'Invalid email or password.',
+        buttons: ['OK']
+      });
+      await alert.present();
+    }
+
       } catch (error) {
         const alerta = await this.alertController.create({
           header: 'FUNNY FAIL',

@@ -22,28 +22,16 @@ export class SignupPage implements OnInit {
 
   constructor(private authService: AuthService, private alertController: AlertController, private router: Router) { }
 
-  async onSubmit(){
-    try{
-      await this.authService.signUp(this.email, this.password);
-      const alert = await this.alertController.create({
-        header: 'Sign up successful',
-        message: 'Account created',
-        buttons: ['OK'],
-      });
-      await alert.present();
-      this.router.navigate(['/login']); 
-    }catch (error){
-      const alert = await this.alertController.create({
-        header: 'Sign up failed',
-        message: 'An error occurred',
-        buttons: ['OK'],
-      });
-      await alert.present();
-    }
-  }
-
   onSignUp() {
     this.router.navigateByUrl("login")
+  }
+
+  Medico(){
+    this.router.navigateByUrl("register-mr-doctor")
+  }
+
+  Paciente(){
+    this.router.navigateByUrl("user-register")
   }
 
   ngOnInit() {

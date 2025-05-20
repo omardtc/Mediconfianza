@@ -2,6 +2,8 @@
   <ion-toolbar>
     <ion-title>
       Calendario
+      {{userE}}->
+      {{userID}}
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -10,6 +12,8 @@
 <div class="container">
   <div style="text-align: center;">{{anioActual}}</div>
   <!-- calendario.component.html -->
+<p>Rol detectado: {{ rol.value }}</p>
+<button (click)="Horarios()">Establecer Horarios</button>
 <table class="table table-bordered calendar-table">
   <thead>
     <tr>
@@ -19,7 +23,7 @@
   <tbody>
     <tr>
       <td *ngFor="let dia of diasSemana" [ngClass]="tieneCitas(dia) ? 'bg-info text-white' : 'bg-light'">
-          <div [ngClass]="diaActual == dia.getDate() && mesActual==dia.getMonth() && anioActual==ano? 'Hoy' : 'NoHoy'">{{ dia.getDate() }}/{{ dia.getMonth() + 1 }}</div>
+          <div [ngClass]="diaActual == dia.getDate() && mesActual==dia.getMonth() && anioActual==ano? 'Hoy' : 'NoHoy'" *ngIf="ShowDate(diaActual, mesActual, ano, dia.getDate(), dia.getMonth(), anioActual)">{{ dia.getDate() }}/{{ dia.getMonth() + 1 }}</div>
         <div *ngFor="let cita of getCitasDelDia(dia)">
           <small>{{ cita.hora }}:00 - Dr. {{ cita.doctorApellido }}</small>
         </div>
@@ -30,8 +34,7 @@
   <!-- <ion-button (click)="CambiarSemana(1)">SIGUIENTE SEMANA</ion-button>
   <ion-button (click)="CambiarSemana(-1)">ANTERIOR SEMANA</ion-button>-->
   <br>
-  <button class="button" (click)="CambiarSemana(-1)">ANTERIOR SEMANA</button>
-  <button style="padding-left: 964px;"></button>
+  <button [disabled]="!ShowDate(1, semanaHoy+1, ano, 1, semanaActual, anioActual)" class="button" (click)="CambiarSemana(-1)">ANTERIOR SEMANA</button>
   <button class="button" (click)="CambiarSemana(1)">SIGUIENTE SEMANA</button>
 </div>
 </ion-content>

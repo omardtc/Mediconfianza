@@ -1,0 +1,25 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>horarios</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-accordion-group>
+  <ion-accordion value="{{dia}}" *ngFor="let dia of dias">
+    <ion-item slot="header">
+      <ion-label>{{dia}}</ion-label>
+    </ion-item>
+    <div slot="content" style="max-height: 200px; overflow-y: auto; border: 1px solid #ccc; border-radius: 8px;">
+      <ion-list>
+        <ion-item *ngFor="let hora of horas">
+          <ion-checkbox slot="start" [checked]="dia5[dia]?.includes(hora)" (ionChange)="shout(dia, hora, $event.detail.checked)"></ion-checkbox>
+          <ion-label>{{ hora }}:00</ion-label>
+      </ion-item>
+      </ion-list>
+    </div>
+  </ion-accordion>
+  </ion-accordion-group>
+
+  <button (click)="obtain()">CLICK</button>
+</ion-content>

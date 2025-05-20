@@ -37,5 +37,9 @@ export const routes: Routes = [
     path: 'hacercita',
     loadComponent: () => import('./hacercita/hacercita.page').then( m => m.HacercitaPage)
   },
+  {
+    path: 'horarios',
+    loadComponent: () => import('./horarios/horarios.page').then( m => m.HorariosPage)
+  },
 
 ];

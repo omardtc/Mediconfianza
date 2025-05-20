@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collection, addDoc, updateDoc, deleteDoc, doc, collectionData } from '@angular/fire/firestore';
+import { Firestore, collection, addDoc, updateDoc, deleteDoc, doc, collectionData, setDoc } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
 export interface Medico {
@@ -9,12 +9,13 @@ export interface Medico {
   especialidad: string;
   estado: string;
   fecha: string;
-  id: string;
+  uid: string;
   mail: string;
   nombre: string;
   password: string;
   telefono: string;
   status: string;
+  horario: string;
 }
 
 @Injectable({
@@ -30,8 +31,9 @@ export class MedicoService {
     return collectionData(this.medicoC,{idField: 'id'}) as Observable <Medico[]>;
   }
 
-  addMedico(medico: Medico){
-    return addDoc(this.medicoC, medico);
+  addMedico(medico: Medico,id:string){
+  const medicoRef = doc(this.firestore, 'medico', id); // UID como ID del documento
+  return setDoc(medicoRef, medico);
   }
 
   updateMedico(id: string, data: Partial <Medico>){
