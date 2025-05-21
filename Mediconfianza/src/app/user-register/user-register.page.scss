@@ -1,26 +1,98 @@
+$primary-color: #005f99;
+$secondary-color: #ffffff;
+$background-color: #f5f9fc;
+$input-background: #ffffff;
+$input-border: #ccd6dd;
+$input-focus: #007acc;
+$error-color: #d9534f;
+
 .container {
-    background-color: #c0d6df;
-    padding: 20px;
-    border-radius: 10px;
+  background-color: $background-color;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+h2 {
+  font-size: 28px;
+  font-weight: 700;
+  color: $primary-color;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+p {
+  font-size: 16px;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: #333;
+}
+
+.regresar {
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  color: $primary-color;
+  text-decoration: none;
+  font-weight: 500;
+
+  &:hover {
+    text-decoration: underline;
   }
-  
-  h2 {
-    font-size: 24px;
-    font-weight: bold;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  label {
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #333;
   }
-  
-  p {
+
+  input,
+  select {
+    padding: 0.75rem;
+    border: 1px solid $input-border;
+    border-radius: 6px;
+    background-color: $input-background;
     font-size: 16px;
+    transition: border-color 0.2s ease;
+
+    &:focus {
+      border-color: $input-focus;
+      outline: none;
+    }
   }
-  
-  .regresar {
-    color: blue;
-    text-decoration: none;
-    display: block;
-    margin-bottom: 15px;
+
+  div[ng-reflect-ng-if="true"] {
+    color: $error-color;
+    font-size: 14px;
+    margin-top: 0.5rem;
   }
-  
-  ion-button {
-    margin-top: 20px;
-    width: 100%;
+}
+
+.btn {
+  margin-top: 1.5rem;
+  padding: 0.75rem;
+  background-color: $primary-color;
+  color: $secondary-color;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: darken($primary-color, 10%);
   }
+}
