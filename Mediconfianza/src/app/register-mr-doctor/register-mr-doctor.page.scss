@@ -1,57 +1,90 @@
-.container {
-    background-color: #c0d6df;
-    padding: 20px;
-    border-radius: 10px;
-  }
-  
-  h2 {
-    font-size: 24px;
-    font-weight: bold;
-  }
-  
-  p {
-    font-size: 16px;
-  }
-  
-  .regresar {
-    color: blue;
-    text-decoration: none;
-    display: block;
-    margin-bottom: 15px;
-  }
-  
-  ion-button {
-    margin-top: 20px;
-    width: 100%;
-  }
+$primary-color: #005f99;
+$secondary-color: #ffffff;
+$background-color: #f5f9fc;
+$input-background: #ffffff;
+$input-border: #ccd6dd;
+$input-focus: #007acc;
 
-  .form-select {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: white;
-    font-size: 16px;
-    cursor: pointer;
-    appearance: none; /* Oculta la flecha en algunos navegadores */
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    position: relative;
+.container {
+  background-color: $background-color;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+h2 {
+  font-size: 28px;
+  font-weight: 700;
+  color: $primary-color;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+p {
+  font-size: 16px;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: #333;
+}
+
+.regresar {
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  color: $primary-color;
+  text-decoration: none;
+  font-weight: 500;
+
+  &:hover {
+    text-decoration: underline;
   }
-  
-  /* Agrega un icono de flecha personalizada */
-  .form-select::after {
+}
+
+ion-button {
+  margin-top: 1.5rem;
+  width: 100%;
+  font-weight: 600;
+  background-color: $primary-color;
+  color: $secondary-color;
+  --box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    background-color: darken($primary-color, 10%);
+  }
+}
+
+.form-select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid $input-border;
+  border-radius: 6px;
+  background-color: $input-background;
+  font-size: 16px;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  position: relative;
+
+  &:focus {
+    border-color: $input-focus;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.4);
+  }
+}
+
+.form-select-wrapper {
+  position: relative;
+
+  &::after {
     content: "▼";
     font-size: 14px;
+    color: $primary-color;
     position: absolute;
-    right: 10px;
+    right: 12px;
     top: 50%;
     transform: translateY(-50%);
     pointer-events: none;
   }
-  
-  .form-select:focus {
-    border-color: #007bff;
-    outline: none;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-  }
+}
