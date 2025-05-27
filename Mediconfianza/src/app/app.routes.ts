@@ -41,5 +41,9 @@ export const routes: Routes = [
     path: 'horarios',
     loadComponent: () => import('./horarios/horarios.page').then( m => m.HorariosPage)
   },
+  {
+    path: 'consultorio',
+    loadComponent: () => import('./consultorio/consultorio.page').then( m => m.ConsultorioPage)
+  },
 
 ];
