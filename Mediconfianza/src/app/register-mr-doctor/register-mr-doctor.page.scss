@@ -104,7 +104,7 @@ ion-content {
       --padding-end: 15px;   // Añadir padding al final del texto
 
       // Estilos del "recuadro" visual del input
-      background: var(--ion-color-step-100, black);
+      background: var(--ion-color-step-100, white-space);
       border-radius: 8px;
       border: 1px solid var(--ion-color-step-150, #e0e0e0);
       box-sizing: border-box; // Incluye padding y borde en el width total
