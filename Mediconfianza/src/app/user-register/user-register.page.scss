@@ -1,98 +1,190 @@
-$primary-color: #005f99;
-$secondary-color: #ffffff;
-$background-color: #f5f9fc;
-$input-background: #ffffff;
-$input-border: #ccd6dd;
-$input-focus: #007acc;
-$error-color: #d9534f;
+ion-header {
+  background: var(--ion-color-primary, #4c2c9d);
+  color: var(--ion-color-primary-contrast, #ffffff);
+  border-bottom: 1px solid var(--ion-color-step-150, #e0e0e0);
 
-.container {
-  background-color: $background-color;
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-h2 {
-  font-size: 28px;
-  font-weight: 700;
-  color: $primary-color;
-  margin-bottom: 1rem;
-  text-align: center;
-}
-
-p {
-  font-size: 16px;
-  margin-bottom: 1.5rem;
-  text-align: center;
-  color: #333;
-}
-
-.regresar {
-  display: inline-block;
-  margin-bottom: 1.5rem;
-  color: $primary-color;
-  text-decoration: none;
-  font-weight: 500;
-
-  &:hover {
-    text-decoration: underline;
-  }
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-  label {
-    margin-bottom: 0.5rem;
-    font-weight: 600;
-    color: #333;
-  }
-
-  input,
-  select {
-    padding: 0.75rem;
-    border: 1px solid $input-border;
-    border-radius: 6px;
-    background-color: $input-background;
-    font-size: 16px;
-    transition: border-color 0.2s ease;
-
-    &:focus {
-      border-color: $input-focus;
-      outline: none;
+  ion-toolbar {
+    --background: var(--ion-color-primary, #4c2c9d);
+    --color: var(--ion-color-primary-contrast, #ffffff);
+    text-align: center;
+    ion-title {
+      font-weight: 600;
+      font-size: 1.35em;
     }
   }
+}
 
-  div[ng-reflect-ng-if="true"] {
-    color: $error-color;
-    font-size: 14px;
-    margin-top: 0.5rem;
+ion-content {
+  --background: var(--ion-color-step-50, #f8f8f8); // Fondo claro y suave
+
+  .container {
+    background: var(--ion-color-light, #ffffff); // Fondo blanco para el formulario
+    padding: 30px 25px;
+    margin: 25px auto; // Centrar el formulario
+    max-width: 500px; // Ancho máximo para el formulario, un poco más que el login
+    border-radius: 15px; // Bordes más redondeados
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); // Sombra más profunda para destacarlo
+
+    h2 {
+      font-size: 1.8em;
+      color: var(--ion-color-dark, #343a40);
+      margin-bottom: 10px;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    p {
+      font-size: 0.95em;
+      color: var(--ion-color-medium, #6c757d);
+      margin-bottom: 25px;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    .regresar {
+      display: block; // Para que ocupe su propia línea y se pueda centrar
+      text-align: center;
+      margin-bottom: 20px; // Espacio debajo del enlace
+      color: var(--ion-color-secondary, #007bff); // Color de enlace
+      font-size: 0.9em;
+      text-decoration: none; // Sin subrayado por defecto
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: var(--ion-color-secondary-shade, #006bdf);
+        text-decoration: underline; // Subrayado al pasar el ratón
+      }
+    }
+
+    form {
+      .form-group {
+        margin-bottom: 20px; // Espacio entre cada grupo de formulario
+        position: relative; // Para posicionar mensajes de error si los hubiera
+
+        label {
+          display: block; // Asegura que la etiqueta esté en su propia línea
+          font-size: 0.95em;
+          color: var(--ion-color-medium, #555555);
+          margin-bottom: 8px;
+          font-weight: 500;
+        }
+
+        input[type="text"],
+        input[type="tel"],
+        input[type="date"],
+        input[type="email"],
+        input[type="password"],
+        select {
+          width: 100%;
+          padding: 14px 18px;
+          border: 1px solid var(--ion-color-step-200, #cccccc);
+          border-radius: 10px;
+          font-size: 1em;
+          color: var(--ion-color-dark, #333333);
+          outline: none;
+          transition: border-color 0.3s ease, box-shadow 0.3s ease;
+          appearance: none; // Elimina estilos nativos en select para mayor control visual
+
+          &:focus {
+            border-color: var(--ion-color-secondary, #007bff);
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+          }
+
+          // Estilos para select para añadir un ícono de flecha si es necesario
+          &[id="sexo"] {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%236c757d"><path d="M7 10l5 5 5-5z"/></svg>');
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 18px;
+            padding-right: 40px; // Espacio para el ícono
+          }
+        }
+
+        // Estilo para el mensaje de error de correo (si aplica)
+        div[ngIf] {
+          color: var(--ion-color-danger, #dc3545);
+          font-size: 0.85em;
+          margin-top: 5px;
+        }
+      }
+
+      button[type="submit"] {
+        width: 100%;
+        --background: var(--ion-color-tertiary, #6f42c1); // Color de acento para el botón de registro
+        --background-activated: var(--ion-color-tertiary-tint, #8e62de);
+        --border-radius: 10px;
+        --box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        font-weight: 600;
+        font-size: 1.1em;
+        padding: 15px 0;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        transition: all 0.3s ease;
+        height: auto;
+        margin-top: 25px; // Espacio superior
+
+        &:hover {
+          opacity: 0.9;
+          transform: translateY(-2px);
+        }
+      }
+    }
   }
 }
 
-.btn {
-  margin-top: 1.5rem;
-  padding: 0.75rem;
-  background-color: $primary-color;
-  color: $secondary-color;
-  border: none;
-  border-radius: 6px;
-  font-size: 16px;
-  font-weight: 600;
-  text-align: center;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
+// Variables de color (idealmente en theme/variables.scss)
+:root {
+  --ion-color-primary: #4c2c9d;
+  --ion-color-primary-rgb: 76, 44, 157;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #43268a;
+  --ion-color-primary-tint: #5e40a6;
 
-  &:hover {
-    background-color: darken($primary-color, 10%);
-  }
+  --ion-color-secondary: #007bff;
+  --ion-color-secondary-rgb: 0, 123, 255;
+  --ion-color-secondary-contrast: #ffffff;
+  --ion-color-secondary-contrast-rgb: 255, 255, 255;
+  --ion-color-secondary-shade: #006bdf;
+  --ion-color-secondary-tint: #1a87ff;
+
+  --ion-color-tertiary: #6f42c1;
+  --ion-color-tertiary-rgb: 111, 66, 193;
+  --ion-color-tertiary-contrast: #ffffff;
+  --ion-color-tertiary-contrast-rgb: 255, 255, 255;
+  --ion-color-tertiary-shade: #623aa9;
+  --ion-color-tertiary-tint: #7e55c6;
+
+  --ion-color-danger: #dc3545;
+  --ion-color-danger-rgb: 220, 53, 69;
+  --ion-color-danger-contrast: #ffffff;
+  --ion-color-danger-contrast-rgb: 255, 255, 255;
+  --ion-color-danger-shade: #c22f3c;
+  --ion-color-danger-tint: #e04959;
+
+  --ion-color-dark: #343a40;
+  --ion-color-dark-rgb: 52, 58, 64;
+  --ion-color-dark-contrast: #ffffff;
+  --ion-color-dark-contrast-rgb: 255, 255, 255;
+  --ion-color-dark-shade: #2e3338;
+  --ion-color-dark-tint: #484d52;
+
+  --ion-color-medium: #6c757d;
+  --ion-color-medium-rgb: 108, 117, 125;
+  --ion-color-medium-contrast: #ffffff;
+  --ion-color-medium-contrast-rgb: 255, 255, 255;
+  --ion-color-medium-shade: #5f676e;
+  --ion-color-medium-tint: #7b838a;
+
+  --ion-color-light: #ffffff;
+  --ion-color-light-rgb: 255, 255, 255;
+  --ion-color-light-contrast: #000000;
+  --ion-color-light-contrast-rgb: 0, 0, 0;
+  --ion-color-light-shade: #e0e0e0;
+  --ion-color-light-tint: #ffffff;
+
+  --ion-color-step-50: #f8f8f8;
+  --ion-color-step-100: #f0f0f0;
+  --ion-color-step-150: #e8e8e8;
+  --ion-color-step-200: #e0e0e0;
 }

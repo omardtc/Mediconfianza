@@ -1,90 +1,270 @@
-$primary-color: #005f99;
-$secondary-color: #ffffff;
-$background-color: #f5f9fc;
-$input-background: #ffffff;
-$input-border: #ccd6dd;
-$input-focus: #007acc;
+ion-header {
+  background: var(--ion-color-primary, #4c2c9d);
+  color: var(--ion-color-primary-contrast, #ffffff);
+  border-bottom: 1px solid var(--ion-color-step-150, #e0e0e0);
 
-.container {
-  background-color: $background-color;
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-h2 {
-  font-size: 28px;
-  font-weight: 700;
-  color: $primary-color;
-  margin-bottom: 1rem;
-  text-align: center;
-}
-
-p {
-  font-size: 16px;
-  margin-bottom: 1.5rem;
-  text-align: center;
-  color: #333;
-}
-
-.regresar {
-  display: inline-block;
-  margin-bottom: 1.5rem;
-  color: $primary-color;
-  text-decoration: none;
-  font-weight: 500;
-
-  &:hover {
-    text-decoration: underline;
+  ion-toolbar {
+    --background: var(--ion-color-primary, #4c2c9d);
+    --color: var(--ion-color-primary-contrast, #ffffff);
+    text-align: center;
+    ion-title {
+      font-weight: 600;
+      font-size: 1.35em;
+    }
   }
 }
 
-ion-button {
-  margin-top: 1.5rem;
-  width: 100%;
-  font-weight: 600;
-  background-color: $primary-color;
-  color: $secondary-color;
-  --box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+ion-content {
+  --background: var(--ion-color-step-50, #f8f8f8);
 
-  &:hover {
-    background-color: darken($primary-color, 10%);
+  .container {
+    background: var(--ion-color-light, #ffffff);
+    padding: 30px 25px;
+    margin: 25px auto;
+    max-width: 550px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+
+    h2 {
+      font-size: 1.8em;
+      color: var(--ion-color-dark, #343a40);
+      margin-bottom: 10px;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    p {
+      font-size: 0.95em;
+      color: var(--ion-color-medium, #6c757d);
+      margin-bottom: 25px;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    .regresar {
+      display: block;
+      text-align: center;
+      margin-bottom: 20px;
+      color: var(--ion-color-secondary, #007bff);
+      font-size: 0.9em;
+      text-decoration: none;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: var(--ion-color-secondary-shade, #006bdf);
+        text-decoration: underline;
+      }
+    }
+
+    ion-list {
+      background: transparent;
+      padding: 0;
+      margin-bottom: 20px;
+    }
+
+    ion-item {
+      --background: transparent;
+      --border-color: var(--ion-color-step-200, #cccccc);
+      --border-width: 0 0 1px 0;
+      --inner-padding-end: 0;
+      --padding-start: 0;
+      margin-bottom: 15px;
+
+      &.item-has-focus {
+        --border-color: var(--ion-color-secondary, #007bff);
+      }
+
+      &:last-of-type {
+        margin-bottom: 0;
+        --border-width: 0;
+      }
+    }
+
+    ion-label {
+      font-size: 0.95em;
+      color: var(--ion-color-medium, #555555);
+      font-weight: 500;
+      margin-bottom: 5px;
+    }
+
+    // --- MEJORAS PARA IONIC INPUTS Y CALENDARIO ---
+    ion-input,
+    ion-datetime,
+    ion-time {
+      // Color del texto que el usuario escribe
+      --color: var(--ion-color-dark, #333333);
+      // Color del texto del placeholder
+      --placeholder-color: var(--ion-color-medium, #999999);
+      --placeholder-opacity: 0.8;
+
+      // Padding interno del input (lo que se ve como el "campo")
+      --padding-top: 10px;
+      --padding-bottom: 10px;
+      --padding-start: 15px; // Añadir padding al inicio del texto
+      --padding-end: 15px;   // Añadir padding al final del texto
+
+      // Estilos del "recuadro" visual del input
+      background: var(--ion-color-step-100, black);
+      border-radius: 8px;
+      border: 1px solid var(--ion-color-step-150, #e0e0e0);
+      box-sizing: border-box; // Incluye padding y borde en el width total
+
+      // Estilo al enfocar
+      &:focus-within { // Usar :focus-within para inputs dentro de ion-item
+        border-color: var(--ion-color-secondary, #007bff);
+        box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+      }
+    }
+
+    // Estilos específicos para ion-datetime y ion-time
+    // Esto afecta el "input" visible en la página
+    ion-datetime, ion-time {
+      // Asegurar que el padding interno esté bien para la fecha/hora mostrada
+      // Esto controla la caja visible del componente, no el picker que aparece
+      padding: 10px 15px;
+    }
+
+    // --- Estilos para los selectores HTML nativos (Especialidad y Estado) ---
+    .form-select {
+      width: 100%;
+      padding: 14px 18px;
+      border: 1px solid var(--ion-color-step-200, #cccccc);
+      border-radius: 10px;
+      font-size: 1em;
+      color: var(--ion-color-dark, #333333);
+      outline: none;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      appearance: none;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%236c757d"><path d="M7 10l5 5 5-5z"/></svg>');
+      background-repeat: no-repeat;
+      background-position: right 15px center;
+      background-size: 18px;
+      padding-right: 40px;
+
+      &:focus {
+        border-color: var(--ion-color-secondary, #007bff);
+        box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+      }
+    }
+
+    // --- Estilos para inputs de email y password (HTML nativos) ---
+    // Sugerencia: Encapsular estos también en <ion-item> con <ion-input>
+    // para una consistencia total y aprovechar los estilos Ionic.
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 14px 18px;
+      margin-top: 5px;
+      margin-bottom: 20px;
+      border: 1px solid var(--ion-color-step-200, black);
+      border-radius: 10px;
+      font-size: 1em;
+      color: var(--ion-color-dark, black);
+      outline: none;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      background-color: var(--ion-color-step-100, black);
+      background: var(--ion-color-step-100, black);
+
+      &:focus {
+        border-color: var(--ion-color-secondary, #007bff);
+        box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+      }
+    }
+
+    label[position="floating"] {
+      display: block;
+      font-size: 0.95em;
+      color: var(--ion-color-medium, #555555);
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    div[ngIf] {
+        color: var(--ion-color-danger, #dc3545);
+        font-size: 0.85em;
+        margin-top: -15px;
+        margin-bottom: 15px;
+    }
+
+    button[expand="full"] { // Asumiendo que este botón es para registrar al médico
+      --background: var(--ion-color-tertiary, #6f42c1);
+      --background-activated: var(--ion-color-tertiary-tint, #8e62de);
+      --border-radius: 10px;
+      --box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+      font-weight: 600;
+      font-size: 1.1em;
+      padding: 15px 0;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      transition: all 0.3s ease;
+      height: auto;
+      margin-top: 25px;
+
+      // Asegurar que use las variables de color definidas
+      background: var(--ion-color-tertiary, #6f42c1);
+      color: var(--ion-color-tertiary-contrast, #ffffff);
+
+      &:hover {
+        opacity: 0.9;
+        transform: translateY(-2px);
+      }
+    }
   }
 }
 
-.form-select {
-  width: 100%;
-  padding: 0.75rem;
-  border: 1px solid $input-border;
-  border-radius: 6px;
-  background-color: $input-background;
-  font-size: 16px;
-  cursor: pointer;
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  position: relative;
+// Variables de color (idealmente en theme/variables.scss)
+:root {
+  --ion-color-primary: #4c2c9d;
+  --ion-color-primary-rgb: 76, 44, 157;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #43268a;
+  --ion-color-primary-tint: #5e40a6;
 
-  &:focus {
-    border-color: $input-focus;
-    outline: none;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.4);
-  }
-}
+  --ion-color-secondary: #007bff;
+  --ion-color-secondary-rgb: 0, 123, 255;
+  --ion-color-secondary-contrast: #ffffff;
+  --ion-color-secondary-contrast-rgb: 255, 255, 255;
+  --ion-color-secondary-shade: #006bdf;
+  --ion-color-secondary-tint: #1a87ff;
 
-.form-select-wrapper {
-  position: relative;
+  --ion-color-tertiary: #6f42c1;
+  --ion-color-tertiary-rgb: 111, 66, 193;
+  --ion-color-tertiary-contrast: #ffffff;
+  --ion-color-tertiary-contrast-rgb: 255, 255, 255;
+  --ion-color-tertiary-shade: #623aa9;
+  --ion-color-tertiary-tint: #7e55c6;
 
-  &::after {
-    content: "▼";
-    font-size: 14px;
-    color: $primary-color;
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    pointer-events: none;
-  }
-}
+  --ion-color-danger: #dc3545;
+  --ion-color-danger-rgb: 220, 53, 69;
+  --ion-color-danger-contrast: #ffffff;
+  --ion-color-danger-contrast-rgb: 255, 255, 255;
+  --ion-color-danger-shade: #c22f3c;
+  --ion-color-danger-tint: #e04959;
+
+  --ion-color-dark: #343a40;
+  --ion-color-dark-rgb: 52, 58, 64;
+  --ion-color-dark-contrast: #ffffff;
+  --ion-color-dark-contrast-rgb: 255, 255, 255;
+  --ion-color-dark-shade: #2e3338;
+  --ion-color-dark-tint: #484d52;
+
+  --ion-color-medium: #6c757d;
+  --ion-color-medium-rgb: 108, 117, 125;
+  --ion-color-medium-contrast: #ffffff;
+  --ion-color-medium-contrast-rgb: 255, 255, 255;
+  --ion-color-medium-shade: #5f676e;
+  --ion-color-medium-tint: #7b838a;
+
+  --ion-color-light: #ffffff;
+  --ion-color-light-rgb: 255, 255, 255;
+  --ion-color-light-contrast: #000000;
+  --ion-color-light-contrast-rgb: 0, 0, 0;
+  --ion-color-light-shade: #e0e0e0;
+  --ion-color-light-tint: #ffffff;
+
+  --ion-color-step-50: #f8f8f8;
+  --ion-color-step-100: #f0f0f0;
+  --ion-color-step-150: #e8e8e8;
+  --ion-color-step-200: #e0e0e0;
+} 

@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { 
-  IonContent, 
-  IonHeader, 
-  IonTitle, 
-  IonToolbar, 
-  IonItem, 
-  IonButton, 
-  IonInput 
+import {
+  IonContent,
+  IonHeader,
+  IonTitle,
+  IonToolbar,
+  IonItem,
+  IonButton,
+  IonInput
 } from '@ionic/angular/standalone';
 import { AlertController } from '@ionic/angular';
-import { Router } from '@angular/router';
+import { Router } from '@angular/router'; // Asegúrate de que esta importación esté presente
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -22,11 +22,11 @@ import { AuthService } from '../auth.service';
   imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonItem, IonButton, IonInput]
 })
 export class PasswordPage implements OnInit {
-  email: string = ''; 
+  email: string = '';
 
   constructor(
-    private authService: AuthService, 
-    private router: Router, 
+    private authService: AuthService,
+    private router: Router, // Inyecta el Router
     private alertController: AlertController
   ) {}
 
@@ -41,7 +41,7 @@ export class PasswordPage implements OnInit {
     try {
       await this.authService.resetPassword(this.email);
       await this.showAlert('Éxito', 'Revisa tu correo para restablecer tu contraseña.');
-      this.router.navigate(['/login']);
+      this.router.navigate(['/login']); // Navega a la página de login después de enviar el correo
     } catch (error) {
       const errorMessage = this.getFirebaseErrorMessage(error);
       this.showAlert('Error', errorMessage);
@@ -49,7 +49,6 @@ export class PasswordPage implements OnInit {
   }
 
   validateEmail(email: string): boolean {
-    // Expresión regular para validar correos electrónicos
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   }
@@ -71,5 +70,10 @@ export class PasswordPage implements OnInit {
     } else {
       return 'Hubo un error. Inténtalo de nuevo más tarde.';
     }
+  }
+
+  // --- Nuevo método para navegar al login ---
+  goToLogin() {
+    this.router.navigate(['/login']); // Navega a la ruta de tu página de login
   }
 }

@@ -5,36 +5,41 @@
       {{userE}}->
       {{userID}}
     </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="logout()">
+        Cerrar Sesión
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
-<div class="container">
-  <div style="text-align: center;">{{anioActual}}</div>
-  <!-- calendario.component.html -->
-<p>Rol detectado: {{ rol.value }}</p>
-<button (click)="Horarios()">Establecer Horarios</button>
-<table class="table table-bordered calendar-table">
-  <thead>
-    <tr>
-      <th *ngFor="let dia of diasSemana">{{ nombresDias[dia.getDay()] }}</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td *ngFor="let dia of diasSemana" [ngClass]="tieneCitas(dia) ? 'bg-info text-white' : 'bg-light'">
-          <div [ngClass]="diaActual == dia.getDate() && mesActual==dia.getMonth() && anioActual==ano? 'Hoy' : 'NoHoy'" *ngIf="ShowDate(diaActual, mesActual, ano, dia.getDate(), dia.getMonth(), anioActual)">{{ dia.getDate() }}/{{ dia.getMonth() + 1 }}</div>
-        <div *ngFor="let cita of getCitasDelDia(dia)">
-          <small>{{ cita.hora }}:00 - Dr. {{ cita.doctorApellido }}</small>
-        </div>
-      </td>
-    </tr>
-  </tbody>
-</table>
-  <!-- <ion-button (click)="CambiarSemana(1)">SIGUIENTE SEMANA</ion-button>
-  <ion-button (click)="CambiarSemana(-1)">ANTERIOR SEMANA</ion-button>-->
-  <br>
-  <button [disabled]="!ShowDate(1, semanaHoy+1, ano, 1, semanaActual, anioActual)" class="button" (click)="CambiarSemana(-1)">ANTERIOR SEMANA</button>
-  <button class="button" (click)="CambiarSemana(1)">SIGUIENTE SEMANA</button>
-</div>
+  <div class="container">
+    <div style="text-align: center;">{{anioActual}}</div>
+    <p>Rol detectado: {{ rol.value }}</p>
+    <button (click)="Horarios()">Establecer Horarios</button>
+    <table class="table table-bordered calendar-table">
+      <thead>
+        <tr>
+          <th *ngFor="let dia of diasSemana">{{ nombresDias[dia.getDay()] }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td *ngFor="let dia of diasSemana" [ngClass]="tieneCitas(dia) ? 'bg-info text-white' : 'bg-light'">
+            <div [ngClass]="diaActual == dia.getDate() && mesActual==dia.getMonth() && anioActual==ano? 'Hoy' : 'NoHoy'"
+              *ngIf="ShowDate(diaActual, mesActual, ano, dia.getDate(), dia.getMonth(), anioActual)">
+              {{ dia.getDate() }}/{{ dia.getMonth() + 1 }}</div>
+            <div *ngFor="let cita of getCitasDelDia(dia)">
+              <small>{{ cita.hora }}:00 - Dr. {{ cita.doctorApellido }}</small>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <button [disabled]="!ShowDate(1, semanaHoy+1, ano, 1, semanaActual, anioActual)" class="button"
+      (click)="CambiarSemana(-1)">ANTERIOR SEMANA</button>
+    <button class="button" (click)="CambiarSemana(1)">SIGUIENTE SEMANA</button>
+  </div>
 </ion-content>

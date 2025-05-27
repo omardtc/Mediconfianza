@@ -1,125 +1,242 @@
+// Variables de color (idealmente en theme/variables.scss, pero aquí para referencia)
+:root {
+  --ion-color-primary: #4c2c9d; // Morado oscuro
+  --ion-color-primary-rgb: 76, 44, 157;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #43268a;
+  --ion-color-primary-tint: #5e40a6;
+
+  --ion-color-secondary: #007bff; // Azul vibrante
+  --ion-color-secondary-rgb: 0, 123, 255;
+  --ion-color-secondary-contrast: #ffffff;
+  --ion-color-secondary-contrast-rgb: 255, 255, 255;
+  --ion-color-secondary-shade: #006bdf;
+  --ion-color-secondary-tint: #1a87ff;
+
+  --ion-color-success: #28a745; // Verde para éxito/info
+  --ion-color-success-rgb: 40, 167, 69;
+  --ion-color-success-contrast: #ffffff;
+
+  --ion-color-danger: #dc3545; // Rojo para errores
+  --ion-color-danger-rgb: 220, 53, 69;
+  --ion-color-danger-contrast: #ffffff;
+
+  --ion-color-light: #ffffff; // Blanco
+  --ion-color-light-rgb: 255, 255, 255;
+  --ion-color-light-contrast: #000000;
+
+  --ion-color-medium: #6c757d; // Gris medio
+  --ion-color-medium-rgb: 108, 117, 125;
+  --ion-color-medium-contrast: #ffffff;
+
+  --ion-color-dark: #343a40; // Gris oscuro
+  --ion-color-dark-rgb: 52, 58, 64;
+  --ion-color-dark-contrast: #ffffff;
+
+  --ion-color-step-50: #f8f8f8;   // Casi blanco
+  --ion-color-step-100: #e9ecef;  // Gris muy claro
+  --ion-color-step-150: #dee2e6;  // Gris claro
+  --ion-color-step-200: #ced4da;  // Gris un poco más oscuro
+  --ion-color-step-700: #495057;  // Gris oscuro
+}
+
+
+ion-header {
+  background: var(--ion-color-primary, #4c2c9d);
+  color: var(--ion-color-primary-contrast, #ffffff);
+  border-bottom: 1px solid var(--ion-color-step-150, #e0e0e0);
+
+  ion-toolbar {
+    --background: var(--ion-color-primary, #4c2c9d);
+    --color: var(--ion-color-primary-contrast, #ffffff);
+    text-align: center;
+    ion-title {
+      font-weight: 600;
+      font-size: 1.35em;
+      // Añadir padding para que el texto del título no esté pegado al borde
+      padding: 0 16px;
+    }
+  }
+}
+
+ion-content {
+  --background: var(--ion-color-step-50, #f8f8f8); // Fondo claro y suave
+
+  .container {
+    background-color: var(--ion-color-light, #ffffff); // Fondo blanco para el contenedor
+    padding: 25px;
+    margin: 25px auto; // Centrar el contenedor
+    max-width: 900px; // Aumentar el ancho máximo para el calendario
+    border-radius: 15px; // Bordes redondeados
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); // Sombra sutil
+
+    h2 { // Para el año actual
+      font-size: 1.6em;
+      color: var(--ion-color-dark, #343a40);
+      margin-bottom: 20px;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    p { // Para el rol detectado
+      font-size: 1em;
+      color: var(--ion-color-medium, #6c757d);
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
+    // Botón "Establecer Horarios"
+    button:not(.button) { // Para diferenciarlo de los botones de navegación
+      --background: var(--ion-color-secondary, #007bff); // Color de acento
+      --background-activated: var(--ion-color-secondary-tint, #1a87ff);
+      --border-radius: 10px;
+      --box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2);
+      font-weight: 600;
+      font-size: 1em;
+      padding: 12px 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+      display: block; // Para centrarlo
+      margin: 0 auto 30px auto; // Centrado con margen inferior
+
+      &:hover {
+        opacity: 0.9;
+        transform: translateY(-2px);
+      }
+    }
+
+    // Estilos de la tabla del calendario
+    .calendar-table {
+      width: 100%;
+      border-collapse: collapse; // Borde simple para las celdas
+      margin-bottom: 25px; // Espacio debajo de la tabla
+      overflow: hidden; // Para que los bordes redondeados se vean bien si la tabla tiene border-radius
+
+      th {
+        background-color: var(--ion-color-primary-shade, #43268a); // Morado oscuro para encabezados
+        color: var(--ion-color-primary-contrast, #ffffff);
+        font-family: 'Roboto', sans-serif; // Fuente más moderna
+        font-weight: 600;
+        padding: 12px 8px;
+        text-align: center;
+        border: 1px solid var(--ion-color-primary-shade, #3b217a); // Borde ligeramente más oscuro
+        text-transform: uppercase;
+        font-size: 0.9em;
+      }
+
+      td {
+        background-color: var(--ion-color-step-100, #f0f0f0); // Fondo gris claro para las celdas
+        border: 1px solid var(--ion-color-step-150, #e0e0e0); // Borde sutil
+        height: 120px; // Altura fija para celdas
+        vertical-align: top; // Alinear contenido arriba
+        padding: 10px; // Relleno interno
+        font-weight: normal; // Resetear el font-weight
+        font-size: 0.95em; // Tamaño de fuente para el contenido general
+
+        // Estilo para el día actual
+        .Hoy {
+          font-weight: 700; // Negrita para el día actual
+          color: var(--ion-color-danger, #dc3545); // Rojo vibrante para hoy
+          font-size: 1.1em;
+          margin-bottom: 5px;
+          display: block; // Para ocupar su propia línea
+        }
+
+        .NoHoy {
+          color: var(--ion-color-dark, #343a40); // Color oscuro normal para otros días
+          font-weight: normal;
+          font-size: 1.1em;
+          margin-bottom: 5px;
+          display: block;
+        }
+
+        // Estilo para celdas con citas
+        &.bg-info { // Si tiene citas, el fondo es un azul claro
+          background-color: var(--ion-color-secondary-tint, #e0f2f7);
+        }
+        &.text-white { // El texto en celdas con citas
+          color: var(--ion-color-dark, #343a40) !important; // Asegurarse de que el texto sea legible
+        }
+        &.bg-light { // Celdas sin citas
+          background-color: var(--ion-color-light, #ffffff); // Fondo blanco
+        }
+
+
+        small { // Detalles de la cita
+          display: block; // Cada cita en su propia línea
+          font-size: 0.85em;
+          color: var(--ion-color-medium, #6c757d);
+          margin-top: 4px;
+          line-height: 1.3;
+          &:first-of-type {
+            margin-top: 8px; // Más espacio para la primera cita
+          }
+        }
+      }
+    }
+
+    // Botones de navegación (ANTERIOR/SIGUIENTE SEMANA)
+    .button {
+      --background: var(--ion-color-primary, #4c2c9d); // Morado primario
+      --background-activated: var(--ion-color-primary-tint, #5e40a6);
+      --border-radius: 8px;
+      --box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      color: var(--ion-color-primary-contrast, #ffffff);
+      font-weight: 600;
+      font-size: 0.95em;
+      padding: 10px 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+      width: 48%; // Ocupar casi la mitad del ancho
+      display: inline-block; // Para que estén en la misma línea
+      margin: 0 1%; // Pequeño espacio entre ellos
+      text-align: center; // Centrar el texto
+
+      &:hover {
+        opacity: 0.9;
+        transform: translateY(-2px);
+      }
+      &:disabled {
+        --background: var(--ion-color-step-200, #cccccc);
+        color: var(--ion-color-medium, #999999);
+        cursor: not-allowed;
+        box-shadow: none;
+      }
+    }
+  }
+}
+
+// Eliminamos estilos que ya no son necesarios o se manejan de otra forma
+/*
 #container {
-  text-align: center;
-
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+  // text-align: center; // Ya manejado por .container
+  // position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-50%); // No es ideal para el contenido principal
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
+#container strong, #container p, #container a { // Se han reemplazado por selectores más específicos
+  // ...
 }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
+.center { // Ya no es necesario con margin: auto y display: block
+  // ...
 }
 
-#container a {
-  text-decoration: none;
+.body { // Se reemplaza con --background en ion-content
+  // ...
 }
 
-.center{
-  text-align: center;
+.input, .label { // No hay inputs directos en este HTML
+  // ...
 }
 
-.body{
-  background: linear-gradient(to right, transparentize(red, 0.5), transparentize(lime, 0.5));
-  height: 100%;
-  font-family: 'Courier New', Courier, monospace;
-  font-weight: bolder;
+.buttonS { // No se usa esta clase en el HTML
+  // ...
 }
 
-.input{
-  background: linear-gradient(to right, transparentize(rgb(135, 71, 71), 0.5), transparentize(rgb(82, 127, 82), 0.5));
-  width: 500px;
-  border: rgb(108, 96, 96) solid 1px;
-  color: black;
-  text-align: center;
+.invis { // No se usa esta clase en el HTML
+  // ...
 }
-
-.label{
-  color: rgb(85, 85, 85);
-}
-
-.input:hover{
-  background: linear-gradient(to right, transparentize(rgb(67, 34, 34), 0.5), transparentize(rgb(44, 68, 44), 0.5));
-  width: 500px;
-  border: rgb(42, 38, 38) solid 1px;
-}
-
-.button{
-  background: linear-gradient(to right, transparentize(rgb(135, 134, 71), 0.5), transparentize(rgb(82, 123, 127), 0.5));
-  padding: 5px;
-  width: 250px;
-  border: black solid 2px;
-}
-
-.button:hover{
-  background: linear-gradient(to right, transparentize(rgb(59, 59, 31), 0.5), transparentize(rgb(28, 43, 44), 0.5));
-}
-
-.buttonS{
-  background: linear-gradient(to right, transparentize(rgb(135, 134, 71), 0.5), transparentize(rgb(82, 123, 127), 0.5));
-  padding: 5px;
-  border: black solid 2px;
-}
-
-.buttonS:hover{
-  background: linear-gradient(to right, transparentize(rgb(59, 59, 31), 0.5), transparentize(rgb(28, 43, 44), 0.5));
-}
-
-table{
-  width: 100%;
-  border: black solid 2px;
-  border-collapse: collapse;
-}
-
-th{
-  color: white;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  background-color: #12287a;
-  border: black solid 2px;
-}
-
-tr{
-  border: black solid 2px;
-}
-
-td{
-  background-color: transparentize(#57707a,0.5);
-  border: black solid 2px;
-  height: 100px;
-  text-align: center;
-  font-weight: bolder;
-  font-size: 20px;
-  width: 15%;
-}
-
-.invis{
-  background-color: transparentize(red, $amount: 1);
-  color: black;
-  border: transparentize(red, $amount: 1) 2px solid;
-  width: auto;
-  text-align: center;
-}
-
-.Hoy{
-  color: red;
-}
-
-.NoHoy{
-  color: black;
-}
-.container {
-  background-color: #c0d6df;
-  padding: 20px;
-  border-radius: 10px;
-}
+*/
