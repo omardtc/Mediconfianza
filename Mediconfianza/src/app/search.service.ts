@@ -12,7 +12,7 @@ import {
 
 // Importa la interfaz desde el archivo de la PÁGINA
 // import { Doctor } from '/search/search.page';
-import { Doctor } from './search/search.page';
+import { Medico, MedicoService } from './medico.service';
 
 @Injectable({
     providedIn: 'root'
@@ -23,7 +23,7 @@ export class SearchService {
 
     // Observable para obtener todos los doctores una vez y reutilizarlo
     // Útil para obtener estados/especialidades sin múltiples lecturas completas
-    private allDoctors$ = (collectionData(this.doctorsCollectionRef, { idField: 'id' }) as Observable<Doctor[]>).pipe(
+    private allDoctors$ = (collectionData(this.doctorsCollectionRef, { idField: 'id' }) as Observable<Medico[]>).pipe(
         catchError(error => {
             console.error("Error fetching all doctors for options: ", error);
             return of([]); // Devuelve array vacío en caso de error
@@ -38,7 +38,7 @@ export class SearchService {
         searchTerm: string | null | undefined,
         state: string | null | undefined,
         specialty: string | null | undefined
-    ): Observable<Doctor[]> {
+    ): Observable<Medico[]> {
         console.log('Searching with:', { searchTerm, state, specialty }); // Para depuración
 
         // Array para guardar las condiciones 'where' de Firestore
@@ -56,8 +56,8 @@ export class SearchService {
         const finalQuery = query(this.doctorsCollectionRef, ...constraints);
 
         // Obtener los datos filtrados por Firestore (estado/especialidad)
-        return (collectionData(finalQuery, { idField: 'id' }) as Observable<Doctor[]>).pipe(
-            map((doctors: Doctor[]) => {
+        return (collectionData(finalQuery, { idField: 'id' }) as Observable<Medico[]>).pipe(
+            map((doctors: Medico[]) => {
                 // *** FILTRADO POR NOMBRE (Lado del Cliente) ***
                 // Firestore no soporta 'contains' case-insensitive fácilmente.
                 // Filtramos aquí los resultados ya obtenidos por estado/especialidad.
@@ -66,7 +66,7 @@ export class SearchService {
                 // o servicios de búsqueda externos (Algolia, Typesense).
                 if (searchTerm) {
                     const lowerTerm = searchTerm.toLowerCase();
-                    return doctors.filter((doc: Doctor) =>
+                    return doctors.filter((doc: Medico) =>
                         (doc.nombre?.toLowerCase() || '').includes(lowerTerm) ||
                         (doc.apellido?.toLowerCase() || '').includes(lowerTerm)
                     );
@@ -88,8 +88,8 @@ export class SearchService {
             map(doctors => [...new Set(doctors.map(d => d.estado))].sort()),
             catchError(error => {
                 console.error("Error getting available states: ", error);
-                return of([]);
-            })
+                return of([]);  
+                        })
         );
     }
 

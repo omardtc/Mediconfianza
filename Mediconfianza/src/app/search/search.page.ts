@@ -8,21 +8,7 @@ import { debounceTime, distinctUntilChanged, switchMap, catchError, startWith, t
 
 // Importa el servicio (que ahora usa Firestore)
 import { SearchService } from '../search.service';
-
-// Interfaz definida aquí DENTRO (se mantiene igual)
-// Asegúrate que coincida con los campos de tu Firestore que quieres usar
-export interface Doctor {
-    id: string; // Firestore document ID
-    nombre: string;
-    apellido: string;
-    especialidad: string;
-    estado: string;
-    cedula?: string; // Campo opcional
-    direccion?: string; // Campo opcional
-    mail?: string; // Campo opcional
-    telefono?: string; // Campo opcional
-    // Agrega aquí cualquier otro campo que necesites de Firestore
-}
+import { Medico, MedicoService } from '../medico.service';
 
 @Component({
     selector: 'app-search',
@@ -48,7 +34,7 @@ export class SearchPage implements OnInit {
     private filterChanges = new Subject<void>();
 
     // Observables para los resultados y opciones
-    doctors$: Observable<Doctor[]> | undefined;
+    doctors$: Observable<Medico[]> | undefined;
     states$: Observable<string[]> | undefined;
     specialties$: Observable<string[]> | undefined;
     isLoading: boolean = false;
@@ -114,7 +100,7 @@ export class SearchPage implements OnInit {
 
 
     // TrackBy para mejorar rendimiento del *ngFor (sin cambios)
-    trackById(index: number, item: Doctor): string {
-        return item.id;
+    trackById(index: number, item: Medico): string {
+        return item.uid;
     }
 }
