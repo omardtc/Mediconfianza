@@ -1,20 +1,40 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import { IonicModule } from '@ionic/angular';
+import { ConsultorioService } from '../consultorio.service';
 
 @Component({
   selector: 'app-consultorio',
   templateUrl: './consultorio.page.html',
   styleUrls: ['./consultorio.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [CommonModule, FormsModule, IonicModule]
 })
-export class ConsultorioPage implements OnInit {
+export class ConsultorioPage {
 
-  constructor() { }
+  userInput: string = '';
+  respuesta: string = '';
+  loading: boolean = false;
 
-  ngOnInit() {
+  constructor(private consultorioService: ConsultorioService) {}
+
+  enviarPregunta() {
+    if (!this.userInput.trim()) return;
+
+    this.loading = true;
+    this.respuesta = '';
+
+    this.consultorioService.generateIdea(this.userInput).subscribe({
+      next: (respuestaIA) => {
+        this.respuesta = respuestaIA;
+        this.loading = false;
+      },
+      error: (error) => {
+        this.respuesta = 'Hubo un error procesando tu consulta. Intenta nuevamente.';
+        this.loading = false;
+        console.error(error);
+      }
+    });
   }
-
 }
