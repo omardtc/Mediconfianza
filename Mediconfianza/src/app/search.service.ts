@@ -57,23 +57,22 @@ export class SearchService {
 
         // Obtener los datos filtrados por Firestore (estado/especialidad)
         return (collectionData(finalQuery, { idField: 'id' }) as Observable<Medico[]>).pipe(
-            map((doctors: Medico[]) => {
-                // *** FILTRADO POR NOMBRE (Lado del Cliente) ***
-                // Firestore no soporta 'contains' case-insensitive fácilmente.
-                // Filtramos aquí los resultados ya obtenidos por estado/especialidad.
-                // Para bases de datos MUY grandes, esto puede ser ineficiente.
-                // Alternativas: Usar campos en minúsculas en Firestore y queries de rango,
-                // o servicios de búsqueda externos (Algolia, Typesense).
-                if (searchTerm) {
-                    const lowerTerm = searchTerm.toLowerCase();
-                    return doctors.filter((doc: Medico) =>
-                        (doc.nombre?.toLowerCase() || '').includes(lowerTerm) ||
-                        (doc.apellido?.toLowerCase() || '').includes(lowerTerm)
-                    );
-                }
-                // Si no hay término de búsqueda, devolver los resultados filtrados por Firestore
-                return doctors;
-            }),
+            // Inside SearchService - searchDoctors method - map operator
+
+// ...
+map((doctors: Medico[]) => {
+    if (searchTerm) {
+        const lowerTerm = searchTerm.toLowerCase().trim(); // trim searchTerm as well
+        // if (lowerTerm === '') return doctors; // Optional: if trimmed searchTerm is empty, don't filter by name
+
+        return doctors.filter((doc: Medico) =>
+            (doc.nombre?.trim().toLowerCase() || '').includes(lowerTerm) ||
+            (doc.apellido?.trim().toLowerCase() || '').includes(lowerTerm)
+        );
+    }
+    return doctors;
+}),
+// ...
             catchError(error => {
                 console.error("Error searching doctors in Firestore: ", error);
                 // Considera mostrar un mensaje al usuario aquí
