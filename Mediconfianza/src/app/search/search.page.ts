@@ -5,8 +5,8 @@ import { IonicModule } from '@ionic/angular';
 import { Observable, Subject, of } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap, catchError, startWith, tap } from 'rxjs/operators';
 
-import { SearchService } from '../../services/search.service'; // Adjusted path
-import { Medico } from '../../services/medico.service';      // Adjusted path
+import { SearchService } from '../search.service'; // Adjusted path
+import { Medico } from '../medico.service';    // Adjusted path
 
 @Component({
   selector: 'app-search',
