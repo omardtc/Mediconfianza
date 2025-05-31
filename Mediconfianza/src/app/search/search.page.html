@@ -1,4 +1,4 @@
-<ion-header [translucent]="true">
+<!-- <ion-header [translucent]="true">
   <ion-toolbar color="primary"> <ion-title>Buscar Médico</ion-title>
   </ion-toolbar>
   <ion-toolbar>
@@ -88,4 +88,59 @@
      </div>
    </ng-template>
 
+</ion-content> -->
+
+<ion-header [translucent]="true">
+  
+  <ion-toolbar color="primary"> <ion-title>Buscar Médico</ion-title>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-searchbar
+      placeholder="Buscar por nombre o apellido..."
+      animated="true"
+      [formControl]="nombre"
+      (click)="call(nombre.value)">
+    </ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <label>Filtrar por Especialidad</label>
+  <select [formControl]='especialidad' (click)="call(especialidad.value)">
+    <option>Todas</option>
+    <option *ngFor="let medico of medicos | async">{{medico.especialidad}}</option>
+  </select>
+  <label>Filtrar por Estado</label>
+  <select [formControl]='estado' (click)="call(estado.value)">
+    <option>Todos</option>
+    <option *ngFor="let medico of medicos | async">{{medico.estado}}</option>
+  </select>
+
+  <div class="container">
+    <table *ngFor="let medico of medicos | async" style="border: 2px black solid;">
+      <div *ngIf="(nombre.value!='' && nombre.value!=null && medico.nombre.toLowerCase().includes(nombre.value.toLowerCase())) || (nombre.value!='' && nombre.value!=null && medico.apellido.toLowerCase().includes(nombre.value.toLowerCase())) || (nombre.value!='' && nombre.value!=null && medico.nombre.toLowerCase().includes(nombre.value.toLowerCase()) && nombre.value!=null && medico.apellido.toLowerCase().includes(nombre.value.toLowerCase()))">
+
+        <div *ngIf="(estado.value == 'Todos' && especialidad.value == 'Todas') || (estado.value == medico.estado && especialidad.value == 'Todas') || (estado.value == 'Todos' && especialidad.value == medico.especialidad) || (estado.value == medico.estado && especialidad.value == medico.especialidad)">
+          <b>{{medico.nombre}} {{medico.apellido}}</b><br>
+          <h6>Cedula: {{medico.cedula}}</h6>
+          <h6><b>Especialidad: {{medico.especialidad}}</b></h6>
+          <h6>Estado: {{medico.estado}}</h6>
+          <h6>Dirección: {{medico.direccion}}</h6>
+          <button>CITAR</button>
+        </div>
+      </div>
+      <div *ngIf="!nombre.value || nombre.value.trim() === ''">
+        <div *ngIf="(estado.value == 'Todos' && especialidad.value == 'Todas') || (estado.value == medico.estado && especialidad.value == 'Todas') || (estado.value == 'Todos' && especialidad.value == medico.especialidad) || (estado.value == medico.estado && especialidad.value == medico.especialidad)">
+          <b>{{medico.nombre}} {{medico.apellido}}</b><br>
+          <h6>Cedula: {{medico.cedula}}</h6>
+          <h6><b>Especialidad: {{medico.especialidad}}</b></h6>
+          <h6>Estado: {{medico.estado}}</h6>
+          <h6>Dirección: {{medico.direccion}}</h6>
+          <button>CITAR</button>
+        </div>
+      </div>
+    </table>
+  </div>
 </ion-content>
+
+
