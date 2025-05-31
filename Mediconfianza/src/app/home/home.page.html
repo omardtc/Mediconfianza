@@ -16,8 +16,10 @@
 <ion-content [fullscreen]="true" class="ion-padding">
   <div class="container">
     <div style="text-align: center;">{{anioActual}}</div>
-    <p>Rol detectado: {{ rol.value }}</p>
-    <button (click)="Horarios()">Establecer Horarios</button>
+    <!-- <p>Rol detectado: {{ rol.value }}</p> -->
+    <button (click)="Horarios()" *ngIf="rol.value=='medico'" >Establecer Horarios</button>
+    <button (click)="Search()" *ngIf="rol.value=='paciente'" >Ver Medicos</button>
+    <button (click)="Logout()">Logout</button>
     <table class="table table-bordered calendar-table">
       <thead>
         <tr>

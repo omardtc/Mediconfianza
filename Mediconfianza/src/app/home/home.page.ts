@@ -158,6 +158,13 @@ export class HomePage {
   Horarios() {
     this.router.navigate(['/horarios']);
   }
+  Search() {
+    this.router.navigate(['/search']);
+  }
+  Logout() {
+    this.authS.logout();
+    this.router.navigate(['/login']);
+  }
 
   // --- Función para cerrar sesión ---
   async logout() {
