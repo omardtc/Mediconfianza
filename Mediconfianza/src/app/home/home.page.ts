@@ -27,6 +27,16 @@ Date.prototype.getWeek = function (): number {
   return 1 + Math.round(((date.getTime() - week1.getTime()) / 86400000 - 3 + ((week1.getDay() + 6) % 7)) / 7);
 };
 
+export interface Cita {
+  id: string;
+  dia: string;
+  hora: string;
+  diaN: number;
+  mes: number;
+  ano: number;
+  accepted: boolean; // Opcional para los pacientes
+}
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -56,8 +66,12 @@ export class HomePage {
   semanaHoy = new Date().getWeek();
 
   rol = new FormControl('');
+  citaz: Cita[] = [];
 
   nombresDias = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
+
+  medicosList: Medico[] = [];
+pacientesList: Paciente[] = [];
 
   userE: string | null = null;
   userID: string | null = null;
@@ -68,6 +82,8 @@ export class HomePage {
       this.userID = user.uid;
     }
     console.log("Página visitada" + this.userE);
+    console.log(this.userID);
+    console.log(this.rol.value);
   }
 
   medicos: Observable<Medico[]>;
@@ -85,38 +101,30 @@ export class HomePage {
 
   ngOnInit() {
     this.diasSemana = this.calendarService.getDiasDeSemana(this.anioActual, this.semanaActual);
-    this.cargarCitas();
     combineLatest([this.medicos, this.pacientes]).subscribe(([medicos, pacientes]) => {
-      const medico = medicos.find(m => m.uid === this.userID);
-      if (medico) {
-        this.rol.setValue('medico');
-      } else {
-        const paciente = pacientes.find(p => p.uid === this.userID);
-        if (paciente) {
-          this.rol.setValue('paciente');
-        } else {
-          this.rol.setValue('medico'); // Default to medico if not found, or redirect
-          // this.router.navigate(['/login']); // Consider redirecting if user not found
-        }
-      }
-    });
+  this.medicosList = medicos;
+  this.pacientesList = pacientes;
+
+  const medico = medicos.find(m => m.uid === this.userID);
+  if (medico) {
+    this.rol.setValue('medico');
+    this.citaz = Array.isArray(medico.citas) ? medico.citas : [];
+  } else {
+    const paciente = pacientes.find(p => p.uid === this.userID);
+    if (paciente) {
+      this.rol.setValue('paciente');
+      this.citaz = Array.isArray(paciente.citas) ? paciente.citas : [];
+    } else {
+      this.router.navigate(['/login']);
+    }
+  }
+});
+
+    // if (this.rol.value==null || this.rol.value == '')this.router.navigate([('/login')]);
   }
 
-  cargarCitas() {
-    // Simular citas (esto vendría de un backend real)
-    // this.citas = [
-    //   { fecha: '2025-05-06', hora: 10, doctorApellido: 'López' },
-    //   { fecha: '2025-05-08', hora: 12, doctorApellido: 'Martínez' },
-    // ];
-  }
-
-  getCitasDelDia(dia: Date) {
-    const fecha = dia.toISOString().split('T')[0];
-    return this.citas.filter(c => c.fecha === fecha);
-  }
-
-  tieneCitas(dia: Date): boolean {
-    return this.getCitasDelDia(dia).length > 0;
+  grita(){
+    console.log(this.rol.value);
   }
 
   CambiarSemana(num: number) {
@@ -155,13 +163,37 @@ export class HomePage {
     }
   }
 
+  Hide(dia: number, mes: number, ano: number, dia2: number, mes2: number, ano2: number): boolean {
+  const citaDate = new Date(ano, mes, dia);       // mes ya está indexado en 0-11
+  const hoyDate = new Date(ano2, mes2, dia2);
+  return citaDate < hoyDate;
+}
+
   Horarios() {
     this.router.navigate(['/horarios']);
   }
   Search() {
-    this.router.navigate(['/search']);
+    this.router.navigate(['/search'], {
+      queryParams: {
+      userID: this.userID,
+      userE: this.userE,
+      rol: this.rol.value,
+    }
+    });
+  }
+  Hcita() {
+    this.router.navigate(['/hacercita'], {
+      queryParams: {
+      id: this.userID,
+      userID: this.userID,
+      userE: this.userE,
+      rol: this.rol.value,
+    }
+    });
   }
   Logout() {
+    this.userE = '';
+    this.userID = '';
     this.authS.logout();
     this.router.navigate(['/login']);
   }
@@ -176,6 +208,25 @@ export class HomePage {
       // Opcional: Mostrar un mensaje al usuario si el cierre de sesión falla
     }
   }
+
+horaDisponible(dia: Date): boolean {
+  return !this.citaz.some(cita =>
+    Number(cita.diaN) === dia.getDate() &&
+    Number(cita.mes) === dia.getMonth() &&
+    Number(cita.ano) === this.ano &&
+    cita.accepted === true
+  );
+}
+
+getCitasDelDia(dia: Date,cita: Cita): boolean {
+  return (
+    Number(cita.diaN) === dia.getDate() &&
+    Number(cita.mes) === dia.getMonth() &&
+    Number(cita.ano) === dia.getFullYear() &&
+    cita.accepted === true
+  );
+}
+
 }
 
 // let date: Date = new Date(); // This line seems to be residual and can be removed

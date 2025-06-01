@@ -1,17 +1,91 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>hacercita</ion-title>
+    <ion-title>
+      HACERCITA
+      {{userE}}->
+      {{userID}}
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="Search()" *ngIf="rol=='paciente'">Volver</ion-button>
+      <ion-button (click)="Home()" *ngIf="rol=='medico'">Volver</ion-button>
+      <!-- <button (click)="grita()">aasa</button> -->
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
+<div *ngIf="rol=='paciente'">
   <div class="container">
-    <table *ngFor="let medico of medicos | async">
-      <b>{{medico.nombre}} {{medico.apellido}}</b><br>
-      <h6>Cedula: {{medico.cedula}}</h6>
-      <h6><b>Especialidad: {{medico.especialidad}}</b></h6>
-      <h6>Estado: {{medico.estado}}</h6>
-      <h6>Dirección: {{medico.direccion}}</h6>
-    </table>
+    <div style="text-align: center;">{{anioActual}}</div>
+    <table class="table table-bordered calendar-table">
+      <thead>
+        <tr>
+          <th *ngFor="let dia of diasSemana">{{ nombresDias[dia.getDay()] }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td *ngFor="let dia of diasSemana" [ngClass]="tieneHorario(dia)? 'green': 'red'">
+  <div [ngClass]="diaActual == dia.getDate() && mesActual==dia.getMonth() && anioActual==ano ? 'Hoy' : 'NoHoy'"
+       *ngIf="ShowDate(diaActual, mesActual, ano, dia.getDate(), dia.getMonth(), anioActual)">
+    {{ dia.getDate() }}/{{ dia.getMonth() + 1 }}
+
+    <div *ngIf="horario[getNombreDia(dia)]">
+      <div *ngFor="let hora of horario[getNombreDia(dia)]">
+        <div *ngIf="horaDisponible(dia, hora)">
+          <button (click)="Anadir(getNombreDia(dia), hora, dia.getDate(), dia.getMonth(), ano)">
+            {{hora}}:00 hs
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
+</td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <button [disabled]="!ShowDate(1, semanaHoy+1, ano, 1, semanaActual, anioActual)" class="button"
+      (click)="CambiarSemana(-1)">ANTERIOR SEMANA</button>
+    <button class="button" (click)="CambiarSemana(1)">SIGUIENTE SEMANA</button>
+  </div>
+</div>
+<div *ngIf="rol=='medico'" class="container">
+  <table class="table table-bordered calendar-table">
+  <thead>
+    <tr>
+      <th>Paciente</th>
+      <th>Sexo</th>
+      <th>Estado</th>
+      <th>Teléfono</th>
+      <th>Hora</th>
+      <th>Dia</th>
+      <th>Acción</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let cita of citasM">
+      <ng-container *ngIf="cita.accepted == false">
+        <ng-container *ngFor="let paciente of pacientesList">
+          <ng-container *ngIf="paciente.uid == cita.id">
+            <td>{{ paciente.nombre }}</td>
+            <td>{{ paciente.sexo }}</td>
+            <td>{{ paciente.estado }}</td>
+            <td>{{ paciente.telefono }}</td>
+            <td>{{cita.hora}}</td>
+            <td>{{cita.dia}} <br> {{cita.diaN}}/{{cita.mes}}/{{cita.ano}}</td>
+            <td><button (click)="aceptar(cita,paciente.uid)">Aceptar cita</button></td>
+          </ng-container>
+        </ng-container>
+      </ng-container>
+    </tr>
+    <tr *ngIf="citasM.length === 0 || todasAceptadas()">
+      <td colspan="100%" class="no-citas">
+      <b>NO HAY CITAS</b>
+    </td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
 </ion-content>

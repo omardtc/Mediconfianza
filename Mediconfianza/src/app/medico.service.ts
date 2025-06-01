@@ -2,6 +2,16 @@ import { Injectable } from '@angular/core';
 import { Firestore, collection, addDoc, updateDoc, deleteDoc, doc, collectionData, setDoc } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
+export interface Cita {
+  id: string;
+  dia: string;
+  hora: string;
+  diaN: number;
+  mes: number;
+  ano: number;
+  accepted: boolean; // Opcional para los pacientes
+}
+
 export interface Medico {
   apellido: string;
   cedula: string;
@@ -16,6 +26,7 @@ export interface Medico {
   telefono: string;
   status: string;
   horario: string;
+  citas?: Cita[];
 }
 
 @Injectable({

@@ -19,7 +19,9 @@
     <!-- <p>Rol detectado: {{ rol.value }}</p> -->
     <button (click)="Horarios()" *ngIf="rol.value=='medico'" >Establecer Horarios</button>
     <button (click)="Search()" *ngIf="rol.value=='paciente'" >Ver Medicos</button>
-    <button (click)="Logout()">Logout</button>
+    <button (click)="Hcita()" *ngIf="rol.value=='medico'" >Ver Citas Pendientes</button>
+    <!-- <button (click)="Logout()">Logout</button> -->
+    <button (click)="grita()">aasa</button>
     <table class="table table-bordered calendar-table">
       <thead>
         <tr>
@@ -28,15 +30,42 @@
       </thead>
       <tbody>
         <tr>
-          <td *ngFor="let dia of diasSemana" [ngClass]="tieneCitas(dia) ? 'bg-info text-white' : 'bg-light'">
-            <div [ngClass]="diaActual == dia.getDate() && mesActual==dia.getMonth() && anioActual==ano? 'Hoy' : 'NoHoy'"
-              *ngIf="ShowDate(diaActual, mesActual, ano, dia.getDate(), dia.getMonth(), anioActual)">
-              {{ dia.getDate() }}/{{ dia.getMonth() + 1 }}</div>
-            <div *ngFor="let cita of getCitasDelDia(dia)">
-              <small>{{ cita.hora }}:00 - Dr. {{ cita.doctorApellido }}</small>
+  <td *ngFor="let dia of diasSemana">
+    <div [ngClass]="diaActual == dia.getDate() && mesActual == dia.getMonth() && anioActual == ano ? 'Hoy' : 'NoHoy'"
+      *ngIf="ShowDate(diaActual, mesActual, ano, dia.getDate(), dia.getMonth(), anioActual)">
+      {{ dia.getDate() }}/{{ dia.getMonth() + 1 }}
+    </div>
+
+    <!-- Mostrar citas del día actual -->
+    <div *ngFor="let cita of citaz">
+      <div *ngIf="getCitasDelDia(dia,cita)">
+        <div *ngIf="rol.value == 'paciente'">
+          <!-- Buscar nombre del médico desde el ID -->
+          <div *ngFor="let medico of medicosList">
+            <div *ngIf="medico.uid === cita.id && !Hide(cita.diaN, cita.mes, cita.ano, diaActual, mesActual, anioActual)">
+              <strong>Médico:</strong> {{ medico.nombre }}
+              <br>
+              <strong>Hora:</strong> {{ cita.hora }}:00
             </div>
-          </td>
-        </tr>
+          </div>
+        </div>
+
+        <div *ngIf="rol.value == 'medico'">
+          <!-- Buscar nombre del paciente desde el ID -->
+          <div *ngFor="let paciente of pacientesList">
+            <div *ngIf="paciente.uid === cita.id && !Hide(cita.diaN, cita.mes, cita.ano, diaActual, mesActual, anioActual)">
+              <strong>Paciente:</strong> {{ paciente.nombre }}
+              <br>
+              <strong>Hora:</strong> {{ cita.hora }}:00
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </td>
+</tr>
+
       </tbody>
     </table>
     <br>

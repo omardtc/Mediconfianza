@@ -104,7 +104,7 @@ export class HorariosPage implements OnInit {
   this.medicos.subscribe(medicos => {
     const medico = medicos.find(m => m.uid === this.userID);
     if (medico && !this.actualizado) {
-      this.actualizado = true; // marcamos que ya actualizamos
+      this.actualizado = true;
       this.actualizarHorario(resultado);
     }
   });

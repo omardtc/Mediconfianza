@@ -183,7 +183,7 @@ ion-content {
       --background-activated: var(--ion-color-primary-tint, #5e40a6);
       --border-radius: 8px;
       --box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-      color: var(--ion-color-primary-contrast, #ffffff);
+      color: var(--ion-color-primary-contrast, #000000);
       font-weight: 600;
       font-size: 0.95em;
       padding: 10px 20px;
@@ -194,14 +194,16 @@ ion-content {
       display: inline-block; // Para que estén en la misma línea
       margin: 0 1%; // Pequeño espacio entre ellos
       text-align: center; // Centrar el texto
+      color: black;
 
       &:hover {
         opacity: 0.9;
         transform: translateY(-2px);
       }
       &:disabled {
-        --background: var(--ion-color-step-200, #cccccc);
-        color: var(--ion-color-medium, #999999);
+        --background: var(--ion-color-step-200, #696969);
+        color: var(--ion-color-medium, #ffffff);
+        color: green($color: #353535);
         cursor: not-allowed;
         box-shadow: none;
       }
