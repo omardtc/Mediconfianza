@@ -177,6 +177,28 @@ ion-content {
       }
     }
 
+    .form-select {
+      width: 100%;
+      padding: 14px 18px;
+      border: 1px solid var(--ion-color-step-200, #cccccc);
+      border-radius: 10px;
+      font-size: 1em;
+      color: var(--ion-color-dark, #333333);
+      outline: none;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      appearance: none;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%236c757d"><path d="M7 10l5 5 5-5z"/></svg>');
+      background-repeat: no-repeat;
+      background-position: right 15px center;
+      background-size: 18px;
+      padding-right: 40px;
+
+      &:focus {
+        border-color: var(--ion-color-secondary, #007bff);
+        box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+      }
+    }
+
     // Botones de navegación (ANTERIOR/SIGUIENTE SEMANA)
     .button {
       --background: var(--ion-color-primary, #4c2c9d); // Morado primario

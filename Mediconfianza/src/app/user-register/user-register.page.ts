@@ -142,4 +142,8 @@ export class UserRegisterPage implements OnInit {
     this.telefono.reset;
   }
 
+  Login(){
+    this.router.navigate(['/login']);
+  }
+
 }

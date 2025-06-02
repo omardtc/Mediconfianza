@@ -86,6 +86,21 @@ ion-content {
       text-align: center;
     }
 
+    .horas-scroll {
+  max-height: 70px;
+  overflow-y: auto;
+  margin-top: 4px;
+
+  button {
+    display: block;
+    width: 100%;
+    margin-bottom: 4px;
+    font-size: 0.8em;
+    padding: 6px 8px;
+    white-space: nowrap;
+  }
+}
+
     // Botón "Establecer Horarios"
     button:not(.button) { // Para diferenciarlo de los botones de navegación
       --background: var(--ion-color-secondary, #007bff); // Color de acento

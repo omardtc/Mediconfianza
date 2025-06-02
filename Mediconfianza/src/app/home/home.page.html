@@ -21,7 +21,7 @@
     <button (click)="Search()" *ngIf="rol.value=='paciente'" >Ver Medicos</button>
     <button (click)="Hcita()" *ngIf="rol.value=='medico'" >Ver Citas Pendientes</button>
     <!-- <button (click)="Logout()">Logout</button> -->
-    <button (click)="grita()">aasa</button>
+    <!-- <button (click)="grita()">aasa</button> -->
     <table class="table table-bordered calendar-table">
       <thead>
         <tr>
@@ -41,7 +41,7 @@
       <div *ngIf="getCitasDelDia(dia,cita)">
         <div *ngIf="rol.value == 'paciente'">
           <!-- Buscar nombre del médico desde el ID -->
-          <div *ngFor="let medico of medicosList">
+          <div class="horas-scroll" *ngFor="let medico of medicosList">
             <div *ngIf="medico.uid === cita.id && !Hide(cita.diaN, cita.mes, cita.ano, diaActual, mesActual, anioActual)">
               <strong>Médico:</strong> {{ medico.nombre }}
               <br>

@@ -1,12 +1,13 @@
 ion-header {
-  background: var(--ion-color-primary, #4c2c9d);
+  background: var(--ion-color-primary, #cadde3);
   color: var(--ion-color-primary-contrast, #ffffff);
-  border-bottom: 1px solid var(--ion-color-step-150, #e0e0e0);
+  border-bottom: 1px solid var(--ion-color-step-150, #c3d4d9);
 
   ion-toolbar {
-    --background: var(--ion-color-primary, #4c2c9d);
+    --background: var(--ion-color-primary, #cadde3);
     --color: var(--ion-color-primary-contrast, #ffffff);
     text-align: center;
+
     ion-title {
       font-weight: 600;
       font-size: 1.35em;
@@ -15,36 +16,36 @@ ion-header {
 }
 
 ion-content {
-  --background: var(--ion-color-step-50, #f8f8f8); // Fondo claro y suave
+  --background: var(--ion-color-step-50, #eff6f8);
 
-  // Estilos para el segundo ion-header collapse="condense" (el grande en iOS)
   ion-header[collapse="condense"] {
     ion-toolbar {
-      --background: var(--ion-color-step-50, #f8f8f8); // Fondo igual que el contenido
+      --background: var(--ion-color-step-50, #eff6f8);
+
       ion-title {
-        color: var(--ion-color-dark, #343a40); // Color oscuro para el título grande
+        color: var(--ion-color-dark, #1e2a2e);
         font-weight: 700;
-        font-size: 2.2em; // Tamaño grande para el título
+        font-size: 2.2em;
       }
     }
   }
 
   form {
-    background: var(--ion-color-light, #ffffff); // Fondo blanco para el formulario
+    background: var(--ion-color-light, #ffffff);
     padding: 30px 25px;
-    margin: 25px auto; // Centrar el formulario
-    max-width: 450px; // Ancho máximo para el formulario
-    border-radius: 15px; // Bordes más redondeados
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); // Sombra más profunda para destacarlo
+    margin: 25px auto;
+    max-width: 450px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
 
     .mb-6 {
-      margin-bottom: 25px; // Espaciado entre grupos de input
+      margin-bottom: 25px;
     }
 
     label {
-      display: block; // Asegura que la etiqueta esté en su propia línea
+      display: block;
       font-size: 0.95em;
-      color: var(--ion-color-medium, #555555);
+      color: var(--ion-color-medium, #4a5d66);
       margin-bottom: 8px;
       font-weight: 500;
     }
@@ -53,151 +54,150 @@ ion-content {
     input[type="password"] {
       width: 100%;
       padding: 14px 18px;
-      border: 1px solid var(--ion-color-step-200, #cccccc); // Borde sutil
-      border-radius: 10px; // Bordes redondeados para inputs
+      border: 1px solid var(--ion-color-step-200, #cfdfe3);
+      border-radius: 10px;
       font-size: 1em;
-      color: var(--ion-color-dark, #333333);
-      outline: none; // Quitar el contorno por defecto
-      transition: border-color 0.3s ease, box-shadow 0.3s ease; // Transición suave
+      color: var(--ion-color-dark, #2d3a3f);
+      outline: none;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
 
       &:focus {
-        border-color: var(--ion-color-secondary, #007bff); // Borde azul al enfocar
-        box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2); // Sombra azul sutil al enfocar
+        border-color: var(--ion-color-secondary, #99b9c3);
+        box-shadow: 0 0 0 3px rgba(154, 187, 196, 0.4);
       }
 
       &.ng-invalid.ng-touched {
-        border-color: var(--ion-color-danger, #dc3545); // Borde rojo si es inválido y tocado
+        border-color: var(--ion-color-danger, #e06666);
       }
     }
 
-    div[ngIf] { // Mensajes de error
-      color: var(--ion-color-danger, #dc3545);
+    div[ngIf] {
+      color: var(--ion-color-danger, #e06666);
       font-size: 0.85em;
       margin-top: 5px;
     }
 
     button[type="submit"] {
       width: 100%;
-      --background: var(--ion-color-primary, #4c2c9d); // Color primario para el botón principal
-      --background-activated: var(--ion-color-primary-tint, #5e40a6);
+      --background: var(--ion-color-primary, #cadde3);
+      --background-activated: var(--ion-color-primary-tint, #d5e5ea);
       --border-radius: 10px;
-      --box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); // Sombra más pronunciada
+      --box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
       font-weight: 600;
       font-size: 1.1em;
-      padding: 15px 0; // Relleno vertical
+      padding: 15px 0;
       text-transform: uppercase;
       letter-spacing: 0.8px;
       transition: all 0.3s ease;
-      margin-top: 25px; // Espacio superior
+      margin-top: 25px;
+      
 
-      span { // Eliminar los estilos de TailwindCSS para usar los de Ionic
+      span {
         background: none;
-        color: var(--ion-color-primary-contrast, #ffffff);
-        padding: 0; // Quitar padding del span
+        color: var(black, #ffffff);
+        padding: 0;
       }
 
       &:disabled {
-        --background: var(--ion-color-medium, #6c757d); // Gris para deshabilitado
-        --background-activated: var(--ion-color-medium-shade, #5f676e);
+        --background: var(--ion-color-medium, #9baeb6);
+        --background-activated: var(--ion-color-medium-shade, #889ba3);
         opacity: 0.7;
         cursor: not-allowed;
         box-shadow: none;
+        color: --ion-color-primary-contrast;
       }
 
       &:hover:not(:disabled) {
         opacity: 0.9;
-        transform: translateY(-2px); // Pequeño efecto al pasar el ratón
+        transform: translateY(-2px);
       }
     }
   }
 
-  // --- MEJORAS PARA LOS BOTONES SECUNDARIOS (RESET PASSWORD Y SIGN UP) ---
   button:not([type="submit"]) {
     display: block;
-    margin: 10px auto; // Ajustar el margen vertical para mejor espaciado
-    max-width: 280px; // Ligeramente más ancho para mejor legibilidad del texto
-    padding: 12px 20px; // Aumentar un poco el padding para un área clickable más cómoda
-    font-size: 0.9em; // Ligeramente más grande para mejor legibilidad
+    margin: 10px auto;
+    max-width: 280px;
+    padding: 12px 20px;
+    font-size: 0.9em;
     font-weight: 500;
     text-transform: none;
 
     --background: transparent;
-    --box-shadow: none; // Sin sombra de botón principal
+    --box-shadow: none;
 
-    // NUEVOS ESTILOS
-    color: var(--ion-color-secondary, #007bff); // Color de enlace
-    border: 1px solid var(--ion-color-step-200, #cccccc); // Borde sutil para darles forma
-    border-radius: 8px; // Bordes suavemente redondeados
-    transition: all 0.3s ease; // Transición suave para todos los efectos
+    color: var(--ion-color-secondary, #a2c2cc);
+    border: 1px solid var(--ion-color-step-200, #cfdfe3);
+    border-radius: 8px;
+    transition: all 0.3s ease;
 
-    span { // Eliminar los estilos de TailwindCSS (si aún existieran)
+    span {
       background: none;
       color: inherit;
       padding: 0;
     }
 
     &:hover {
-      background: var(--ion-color-step-100, #e9ecef); // Fondo gris claro al pasar el ratón
-      color: var(--ion-color-secondary-shade, #006bdf); // Color más oscuro al pasar el ratón
-      text-decoration: none; // Quitar subrayado si lo tenía al hover, o mantenerlo dependiendo del gusto
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); // Sombra sutil al pasar el ratón para dar "profundidad"
-      transform: translateY(-1px); // Ligero levantamiento al pasar el ratón
+      background: var(--ion-color-step-100, #eaf1f3);
+      color: var(--ion-color-secondary-shade, #87aab5);
+      text-decoration: none;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      transform: translateY(-1px);
     }
 
     &:active {
-      transform: translateY(0); // Vuelve a su posición original al hacer clic
-      box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1); // Sombra más sutil al hacer clic
+      transform: translateY(0);
+      box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
     }
   }
 }
 
-// Variables de color (reafirmadas, idealmente en theme/variables.scss)
 :root {
-  --ion-color-primary: #4c2c9d; // Morado oscuro (profesionalismo)
-  --ion-color-primary-rgb: 76, 44, 157;
+  --ion-color-primary: #cadde3;
+  --ion-color-primary-rgb: 202, 221, 227;
   --ion-color-primary-contrast: #ffffff;
   --ion-color-primary-contrast-rgb: 255, 255, 255;
-  --ion-color-primary-shade: #43268a;
-  --ion-color-primary-tint: #5e40a6;
+  --ion-color-primary-shade: #b4c7cd;
+  --ion-color-primary-tint: #d5e5ea;
 
-  --ion-color-secondary: #007bff; // Azul vibrante (confianza, enlaces)
-  --ion-color-secondary-rgb: 0, 123, 255;
+  --ion-color-secondary: #a2c2cc;
+  --ion-color-secondary-rgb: 162, 194, 204;
   --ion-color-secondary-contrast: #ffffff;
   --ion-color-secondary-contrast-rgb: 255, 255, 255;
-  --ion-color-secondary-shade: #006bdf;
-  --ion-color-secondary-tint: #1a87ff;
+  --ion-color-secondary-shade: #87aab5;
+  --ion-color-secondary-tint: #b3d0d9;
 
-  --ion-color-danger: #dc3545; // Rojo para errores
-  --ion-color-danger-rgb: 220, 53, 69;
+  --ion-color-danger: #e06666;
+  --ion-color-danger-rgb: 224, 102, 102;
   --ion-color-danger-contrast: #ffffff;
   --ion-color-danger-contrast-rgb: 255, 255, 255;
-  --ion-color-danger-shade: #c22f3c;
-  --ion-color-danger-tint: #e04959;
+  --ion-color-danger-shade: #c25959;
+  --ion-color-danger-tint: #e67979;
 
   --ion-color-light: #ffffff;
   --ion-color-light-rgb: 255, 255, 255;
   --ion-color-light-contrast: #000000;
   --ion-color-light-contrast-rgb: 0, 0, 0;
-  --ion-color-light-shade: #e0e0e0;
+  --ion-color-light-shade: #eaeaea;
   --ion-color-light-tint: #ffffff;
 
-  --ion-color-medium: #6c757d; // Gris medio
-  --ion-color-medium-rgb: 108, 117, 125;
+  --ion-color-medium: #9baeb6;
+  --ion-color-medium-rgb: 155, 174, 182;
   --ion-color-medium-contrast: #ffffff;
   --ion-color-medium-contrast-rgb: 255, 255, 255;
-  --ion-color-medium-shade: #5f676e;
-  --ion-color-medium-tint: #7b838a;
+  --ion-color-medium-shade: #889ba3;
+  --ion-color-medium-tint: #a9bcc3;
 
-  --ion-color-dark: #343a40; // Gris oscuro
-  --ion-color-dark-rgb: 52, 58, 64;
+  --ion-color-dark: #2d3a3f;
+  --ion-color-dark-rgb: 45, 58, 63;
   --ion-color-dark-contrast: #ffffff;
   --ion-color-dark-contrast-rgb: 255, 255, 255;
-  --ion-color-dark-shade: #2e3338;
-  --ion-color-dark-tint: #484d52;
+  --ion-color-dark-shade: #263134;
+  --ion-color-dark-tint: #3f4c51;
 
-  --ion-color-step-50: #f8f8f8;
-  --ion-color-step-100: #f0f0f0;
-  --ion-color-step-150: #e8e8e8;
-  --ion-color-step-200: #e0e0e0;
-  --ion-color-step-250: #c2c2c2;
+  --ion-color-step-50: #eff6f8;
+  --ion-color-step-100: #eaf1f3;
+  --ion-color-step-150: #c3d4d9;
+  --ion-color-step-200: #cfdfe3;
+  --ion-color-step-250: #b3c6cc;
 }

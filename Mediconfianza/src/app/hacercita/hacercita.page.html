@@ -26,21 +26,19 @@
       <tbody>
         <tr>
           <td *ngFor="let dia of diasSemana" [ngClass]="tieneHorario(dia)? 'green': 'red'">
-  <div [ngClass]="diaActual == dia.getDate() && mesActual==dia.getMonth() && anioActual==ano ? 'Hoy' : 'NoHoy'"
-       *ngIf="ShowDate(diaActual, mesActual, ano, dia.getDate(), dia.getMonth(), anioActual)">
-    {{ dia.getDate() }}/{{ dia.getMonth() + 1 }}
-
-    <div *ngIf="horario[getNombreDia(dia)]">
-      <div *ngFor="let hora of horario[getNombreDia(dia)]">
-        <div *ngIf="horaDisponible(dia, hora)">
-          <button (click)="Anadir(getNombreDia(dia), hora, dia.getDate(), dia.getMonth(), ano)">
-            {{hora}}:00 hs
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-</td>
+            <div [ngClass]="diaActual == dia.getDate() && mesActual==dia.getMonth() && anioActual==ano ? 'Hoy' : 'NoHoy'"*ngIf="ShowDate(diaActual, mesActual, ano, dia.getDate(), dia.getMonth(), anioActual)">
+              {{ dia.getDate() }}/{{ dia.getMonth() + 1 }}
+              <div class="horas-scroll" *ngIf="horario[getNombreDia(dia)]">
+                <div *ngFor="let hora of horario[getNombreDia(dia)]">
+                  <div *ngIf="horaDisponible(dia, hora)">
+                    <button (click)="Anadir(getNombreDia(dia), hora, dia.getDate(), dia.getMonth(), ano)">
+                      {{hora}}:00 hs
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </td>
         </tr>
       </tbody>
     </table>

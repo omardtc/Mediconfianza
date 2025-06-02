@@ -35,7 +35,7 @@ export class LoginPage implements OnInit {
         message: 'You have logged in successfully!',
         buttons: ['OK']
       });
-      await alert.present();
+      // await alert.present();
       this.router.navigate(['/home']);
     } catch (error) {
       const alert = await this.alertController.create({

@@ -150,5 +150,8 @@ export class RegisterMrDoctorPage implements OnInit {
     this.telefono.reset;
   }
 
+  Login(){
+    this.router.navigate(['/login']);
+  }
 
 }

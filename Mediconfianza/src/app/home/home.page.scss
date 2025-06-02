@@ -4,7 +4,7 @@
   --ion-color-primary-rgb: 76, 44, 157;
   --ion-color-primary-contrast: #ffffff;
   --ion-color-primary-contrast-rgb: 255, 255, 255;
-  --ion-color-primary-shade: #43268a;
+  --ion-color-primary-shade: #000000;
   --ion-color-primary-tint: #5e40a6;
 
   --ion-color-secondary: #007bff; // Azul vibrante
@@ -40,8 +40,6 @@
   --ion-color-step-200: #ced4da;  // Gris un poco más oscuro
   --ion-color-step-700: #495057;  // Gris oscuro
 }
-
-
 ion-header {
   background: var(--ion-color-primary, #4c2c9d);
   color: var(--ion-color-primary-contrast, #ffffff);
@@ -115,7 +113,7 @@ ion-content {
       overflow: hidden; // Para que los bordes redondeados se vean bien si la tabla tiene border-radius
 
       th {
-        background-color: var(--ion-color-primary-shade, #43268a); // Morado oscuro para encabezados
+        background-color: var(--ion-color-primary-shade, #26808a); // Morado oscuro para encabezados
         color: var(--ion-color-primary-contrast, #ffffff);
         font-family: 'Roboto', sans-serif; // Fuente más moderna
         font-weight: 600;
@@ -176,6 +174,21 @@ ion-content {
         }
       }
     }
+
+    .horas-scroll {
+  max-height: 70px;
+  overflow-y: auto;
+  margin-top: 4px;
+
+  button {
+    display: block;
+    width: 100%;
+    margin-bottom: 4px;
+    font-size: 0.8em;
+    padding: 6px 8px;
+    white-space: nowrap;
+  }
+}
 
     // Botones de navegación (ANTERIOR/SIGUIENTE SEMANA)
     .button {

@@ -190,7 +190,13 @@ export class HacercitaPage implements OnInit {
   }
 
   Search() {
-    this.router.navigate(['/search']);
+    this.router.navigate(['/search'], {
+      queryParams:{
+        userID: this.userID,
+        userE: this.userE,
+        rol: this.rol,
+      }
+    });
   }
   Home() {
     this.router.navigate(['/home'],{

@@ -3,28 +3,30 @@
   <ion-toolbar color="primary"> <ion-title>Buscar Médico</ion-title>
   </ion-toolbar>
   <ion-toolbar>
+    <ion-button slot="end" (click)="Home()">Volver</ion-button>
     <ion-searchbar
       placeholder="Buscar por nombre o apellido..."
       animated="true"
       [formControl]="nombre"
       (click)="call(nombre.value)">
     </ion-searchbar>
-    <ion-button (click)="Home()">Volver</ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
+  <div class="container">
   <label>Filtrar por Especialidad</label>
-<select [formControl]='especialidad' (click)="call(especialidad.value)">
+<select class="form-select" [formControl]='especialidad' (click)="call(especialidad.value)">
   <option>Todas</option>
   <option *ngFor="let esp of especialidadesUnicas">{{esp}}</option>
 </select>
-
+<br>
 <label>Filtrar por Estado</label>
-<select [formControl]='estado' (click)="call(estado.value)">
+<select class="form-select" [formControl]='estado' (click)="call(estado.value)">
   <option>Todos</option>
   <option *ngFor="let est of estadosUnicos">{{est}}</option>
 </select>
+</div>
 
   <div class="container">
     <table class="table table-bordered calendar-table">
@@ -40,7 +42,7 @@
   </thead>
   <tbody>
     <ng-container *ngFor="let medico of medicos | async">
-      
+      <ng-container *ngIf="medico.horario!=''">
       <!-- Filtrado por nombre -->
       <ng-container *ngIf="(nombre.value && nombre.value.trim() !== '') && 
         (
@@ -77,7 +79,7 @@
           <td><button (click)="Hcita(medico.uid)">AGENDAR</button></td>
         </tr>
       </ng-container>
-
+    </ng-container>
     </ng-container>
   </tbody>
 </table>
